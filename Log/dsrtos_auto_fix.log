@@ -1,0 +1,53 @@
+23:19:58: DSRTOS Dynamic Compilation Fixer Started
+23:19:58: ==================================================
+23:19:58: Backup created: backup_20250901_231958_*
+23:19:58: Fix iteration 1/7
+23:19:58: Analyzing compilation errors...
+23:19:58: Current errors:
+23:19:58:   make: *** No rule to make target 'build/obj/dsrtos_stubs.o', needed by 'build/bin/dsrtos_debug.elf'.  Stop.
+23:19:58: Fixing missing rule for: build/obj/dsrtos_stubs.o
+23:19:58:   Found source: src/dsrtos_stubs.c
+23:19:58: Applied 1 fixes in iteration 1
+23:19:58: Fix iteration 2/7
+23:19:59: Analyzing compilation errors...
+23:19:59: Current errors:
+23:19:59:   make: *** No rule to make target 'build/obj/dsrtos_stubs.o', needed by 'build/bin/dsrtos_debug.elf'.  Stop.
+23:19:59: Fixing missing rule for: build/obj/dsrtos_stubs.o
+23:19:59:   Found source: src/dsrtos_stubs.c
+23:19:59: Applied 1 fixes in iteration 2
+23:19:59: Fix iteration 3/7
+23:19:59: Analyzing compilation errors...
+23:19:59: Current errors:
+23:19:59:   make: *** No rule to make target 'build/obj/dsrtos_stubs.o', needed by 'build/bin/dsrtos_debug.elf'.  Stop.
+23:19:59: Fixing missing rule for: build/obj/dsrtos_stubs.o
+23:19:59:   Found source: src/dsrtos_stubs.c
+23:19:59: Applied 1 fixes in iteration 3
+23:19:59: Fix iteration 4/7
+23:19:59: Analyzing compilation errors...
+23:19:59: Current errors:
+23:19:59:   make: *** No rule to make target 'build/obj/dsrtos_stubs.o', needed by 'build/bin/dsrtos_debug.elf'.  Stop.
+23:19:59: Fixing missing rule for: build/obj/dsrtos_stubs.o
+23:19:59:   Found source: src/dsrtos_stubs.c
+23:19:59: Applied 1 fixes in iteration 4
+23:19:59: Fix iteration 5/7
+23:19:59: Analyzing compilation errors...
+23:19:59: Current errors:
+23:19:59:   make: *** No rule to make target 'build/obj/dsrtos_stubs.o', needed by 'build/bin/dsrtos_debug.elf'.  Stop.
+23:19:59: Fixing missing rule for: build/obj/dsrtos_stubs.o
+23:19:59:   Found source: src/dsrtos_stubs.c
+23:19:59: Applied 1 fixes in iteration 5
+23:19:59: Fix iteration 6/7
+23:19:59: Analyzing compilation errors...
+23:19:59: Current errors:
+23:19:59:   make: *** No rule to make target 'build/obj/dsrtos_stubs.o', needed by 'build/bin/dsrtos_debug.elf'.  Stop.
+23:19:59: Fixing missing rule for: build/obj/dsrtos_stubs.o
+23:19:59:   Found source: src/dsrtos_stubs.c
+23:19:59: Applied 1 fixes in iteration 6
+23:19:59: Fix iteration 7/7
+23:20:00: Analyzing compilation errors...
+23:20:00: Current errors:
+23:20:00:   make: *** No rule to make target 'build/obj/dsrtos_stubs.o', needed by 'build/bin/dsrtos_debug.elf'.  Stop.
+23:20:00: Fixing missing rule for: build/obj/dsrtos_stubs.o
+23:20:00:   Found source: src/dsrtos_stubs.c
+23:20:00: Applied 1 fixes in iteration 7
+23:20:00: ERROR: Could not resolve all compilation errors

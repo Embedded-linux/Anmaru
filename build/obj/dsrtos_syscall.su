@@ -1,0 +1,8 @@
+include/common/core_cm4.h:260:20:NVIC_SetPriority	16	static
+src/phase2/dsrtos_syscall.c:55:32:syscall_find_entry	16	static
+src/phase2/dsrtos_syscall.c:61:17:syscall_get_timestamp	4	static
+src/phase2/dsrtos_syscall.c:73:16:dsrtos_syscall_init	16	static
+src/phase2/dsrtos_syscall.c:109:16:dsrtos_syscall_register	40	static
+src/phase2/dsrtos_syscall.c:146:16:dsrtos_syscall_unregister	40	static
+src/phase2/dsrtos_syscall.c:179:16:dsrtos_syscall	96	static
+src/phase2/dsrtos_syscall.c:224:16:dsrtos_syscall_from_isr	32	static

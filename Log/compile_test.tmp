@@ -1,0 +1,146 @@
+CFLAGS = -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DSTM32F4xx -DSTM32F407VG -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -DDSRTOS_BUILD_NUMBER=\"dev\" -DDSRTOS_BUILD_DATE=\"20250901_225732\" -Iinclude -Iinclude/phase1 -Iinclude/phase2 -Iinclude/common -Iinclude/hal -Iinclude/drivers -Wall -Wextra -Wpedantic -Wshadow -Wundef -Wcast-align -Wcast-qual -Wconversion -Wsign-conversion -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wswitch-default -Wswitch-enum -Wlogical-op -Wfloat-equal -Wwrite-strings -Wpointer-arith -Wstrict-overflow=5 -Wformat=2 -Wformat-truncation -Wnull-dereference -Wstack-usage=256 -Wno-unused-parameter -Wno-missing-field-initializers -fno-strict-aliasing -fno-builtin -ffreestanding -fno-common -ffunction-sections -fdata-sections -fstack-protector-strong -fstack-usage -fno-delete-null-pointer-checks -O0 -g3 -ggdb -DDEBUG -DDSRTOS_DEBUG_ENABLED=1 -DDSRTOS_ASSERT_ENABLED=1 -DDSRTOS_STATS_ENABLED=1 -std=c11 -fmessage-length=0 -fdiagnostics-color=always --specs=nano.specs -MMD -MP
+CFLAGS = -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DSTM32F4xx -DSTM32F407VG -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -DDSRTOS_BUILD_NUMBER=\"dev\" -DDSRTOS_BUILD_DATE=\"20250901_225732\" -Iinclude -Iinclude/phase1 -Iinclude/phase2 -Iinclude/common -Iinclude/hal -Iinclude/drivers -Wall -Wextra -Wpedantic -Wshadow -Wundef -Wcast-align -Wcast-qual -Wconversion -Wsign-conversion -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wswitch-default -Wswitch-enum -Wlogical-op -Wfloat-equal -Wwrite-strings -Wpointer-arith -Wstrict-overflow=5 -Wformat=2 -Wformat-truncation -Wnull-dereference -Wstack-usage=256 -Wno-unused-parameter -Wno-missing-field-initializers -fno-strict-aliasing -fno-builtin -ffreestanding -fno-common -ffunction-sections -fdata-sections -fstack-protector-strong -fstack-usage -fno-delete-null-pointer-checks -O0 -g3 -ggdb -DDEBUG -DDSRTOS_DEBUG_ENABLED=1 -DDSRTOS_ASSERT_ENABLED=1 -DDSRTOS_STATS_ENABLED=1 -std=c11 -fmessage-length=0 -fdiagnostics-color=always --specs=nano.specs -MMD -MP
+make: Circular directories <- build dependency dropped.
+[01m[Ksrc/main.c:948:1:[m[K [01;35m[Kwarning: [m[K"/*" within comment [[01;35m[K-Wcomment[m[K]
+  948 | /* CERTIFIED_DUPLICATE_REMOVED: dsrtos_result_t dsrtos_debug_init(void) { return DSRTOS_SUCCESS; }
+      |  
+[01m[Ksrc/main.c:964:1:[m[K [01;35m[Kwarning: [m[K"/*" within comment [[01;35m[K-Wcomment[m[K]
+  964 | /* CERTIFIED_DUPLICATE_REMOVED: dsrtos_result_t dsrtos_memory_self_test(void) { return DSRTOS_SUCCESS; }
+      |  
+[01m[Ksrc/main.c:965:1:[m[K [01;35m[Kwarning: [m[K"/*" within comment [[01;35m[K-Wcomment[m[K]
+  965 | /* CERTIFIED_DUPLICATE_REMOVED: dsrtos_result_t dsrtos_clock_validate(void) { return DSRTOS_SUCCESS; }
+      |  
+[01m[Ksrc/main.c:966:1:[m[K [01;35m[Kwarning: [m[K"/*" within comment [[01;35m[K-Wcomment[m[K]
+  966 | /* CERTIFIED_DUPLICATE_REMOVED: dsrtos_result_t dsrtos_scheduler_validate(void) { return DSRTOS_SUCCESS; }
+      |  
+[01m[Ksrc/main.c:968:1:[m[K [01;35m[Kwarning: [m[K"/*" within comment [[01;35m[K-Wcomment[m[K]
+  968 | /* CERTIFIED_DUPLICATE_REMOVED: dsrtos_result_t dsrtos_task_create(dsrtos_task_func_t task_func, const char* name,
+      |  
+[01m[Ksrc/main.c:983:1:[m[K [01;35m[Kwarning: [m[K"/*" within comment [[01;35m[K-Wcomment[m[K]
+  983 | /*==============================================================================
+      |  
+[CC]  src/phase1/dsrtos_boot.c
+In file included from [01m[Kinclude/common/stm32_compat.h:5[m[K,
+                 from [01m[Ksrc/phase1/dsrtos_boot.c:7[m[K:
+[01m[Kinclude/common/stm32f4xx.h:308:17:[m[K [01;35m[Kwarning: [m[Kredundant redeclaration of '[01m[KSystemCoreClock[m[K' [[01;35m[K-Wredundant-decls[m[K]
+  308 | extern uint32_t [01;35m[KSystemCoreClock[m[K;
+      |                 [01;35m[K^~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kinclude/common/stm32_compat.h:5[m[K,
+                 from [01m[Ksrc/phase1/dsrtos_boot.c:7[m[K:
+[01m[Kinclude/common/stm32f4xx.h:31:17:[m[K [01;36m[Knote: [m[Kprevious declaration of '[01m[KSystemCoreClock[m[K' was here
+   31 | extern uint32_t [01;36m[KSystemCoreClock[m[K;
+      |                 [01;36m[K^~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kinclude/common/stm32_compat.h:5[m[K,
+                 from [01m[Ksrc/phase1/dsrtos_boot.c:7[m[K:
+[01m[Kinclude/common/stm32f4xx.h:311:6:[m[K [01;35m[Kwarning: [m[Kredundant redeclaration of '[01m[KSystemInit[m[K' [[01;35m[K-Wredundant-decls[m[K]
+  311 | void [01;35m[KSystemInit[m[K(void);
+      |      [01;35m[K^~~~~~~~~~[m[K
+In file included from [01m[Kinclude/common/stm32_compat.h:5[m[K,
+                 from [01m[Ksrc/phase1/dsrtos_boot.c:7[m[K:
+[01m[Kinclude/common/stm32f4xx.h:34:6:[m[K [01;36m[Knote: [m[Kprevious declaration of '[01m[KSystemInit[m[K' was here
+   34 | void [01;36m[KSystemInit[m[K(void);
+      |      [01;36m[K^~~~~~~~~~[m[K
+In file included from [01m[Kinclude/common/stm32_compat.h:5[m[K,
+                 from [01m[Ksrc/phase1/dsrtos_boot.c:7[m[K:
+[01m[Kinclude/common/stm32f4xx.h:312:6:[m[K [01;35m[Kwarning: [m[Kredundant redeclaration of '[01m[KSystemCoreClockUpdate[m[K' [[01;35m[K-Wredundant-decls[m[K]
+  312 | void [01;35m[KSystemCoreClockUpdate[m[K(void);
+      |      [01;35m[K^~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kinclude/common/stm32_compat.h:5[m[K,
+                 from [01m[Ksrc/phase1/dsrtos_boot.c:7[m[K:
+[01m[Kinclude/common/stm32f4xx.h:35:6:[m[K [01;36m[Knote: [m[Kprevious declaration of '[01m[KSystemCoreClockUpdate[m[K' was here
+   35 | void [01;36m[KSystemCoreClockUpdate[m[K(void);
+      |      [01;36m[K^~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[Kinclude/common/stm32_compat.h:5[m[K,
+                 from [01m[Ksrc/phase1/dsrtos_boot.c:7[m[K:
+[01m[Kinclude/common/stm32f4xx.h:315:17:[m[K [01;35m[Kwarning: [m[Kredundant redeclaration of '[01m[KSystemCoreClock[m[K' [[01;35m[K-Wredundant-decls[m[K]
+  315 | extern uint32_t [01;35m[KSystemCoreClock[m[K;
+      |                 [01;35m[K^~~~~~~~~~~~~~~[m[K
+[01m[Kinclude/common/stm32f4xx.h:308:17:[m[K [01;36m[Knote: [m[Kprevious declaration of '[01m[KSystemCoreClock[m[K' was here
+  308 | extern uint32_t [01;36m[KSystemCoreClock[m[K;
+      |                 [01;36m[K^~~~~~~~~~~~~~~[m[K
+In file included from [01m[Ksrc/phase1/dsrtos_boot.c:7[m[K:
+[01m[Kinclude/common/stm32_compat.h:43:[m[K [01;35m[Kwarning: [m[K"TIM2_BASE" redefined
+   43 | #define TIM2_BASE                    (0x40000000UL)
+      | 
+In file included from [01m[Kinclude/common/stm32_compat.h:5[m[K,
+                 from [01m[Ksrc/phase1/dsrtos_boot.c:7[m[K:
+[01m[Kinclude/common/stm32f4xx.h:89:[m[K [01;36m[Knote: [m[Kthis is the location of the previous definition
+   89 | #define TIM2_BASE           (APB1PERIPH_BASE + 0x0000UL)
+      | 
+[01m[Ksrc/phase1/dsrtos_boot.c:34:24:[m[K [01;35m[Kwarning: [m[Kredundant redeclaration of '[01m[Kvalidate_clock_configuration[m[K' [[01;35m[K-Wredundant-decls[m[K]
+   34 | static dsrtos_result_t [01;35m[Kvalidate_clock_configuration[m[K(void);
+      |                        [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:22:24:[m[K [01;36m[Knote: [m[Kprevious declaration of '[01m[Kvalidate_clock_configuration[m[K' was here
+   22 | static dsrtos_result_t [01;36m[Kvalidate_clock_configuration[m[K(void);
+      |                        [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:35:24:[m[K [01;35m[Kwarning: [m[Kredundant redeclaration of '[01m[Kvalidate_interrupt_configuration[m[K' [[01;35m[K-Wredundant-decls[m[K]
+   35 | static dsrtos_result_t [01;35m[Kvalidate_interrupt_configuration[m[K(void);
+      |                        [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:23:24:[m[K [01;36m[Knote: [m[Kprevious declaration of '[01m[Kvalidate_interrupt_configuration[m[K' was here
+   23 | static dsrtos_result_t [01;36m[Kvalidate_interrupt_configuration[m[K(void);
+      |                        [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:36:24:[m[K [01;35m[Kwarning: [m[Kredundant redeclaration of '[01m[Kvalidate_timer_configuration[m[K' [[01;35m[K-Wredundant-decls[m[K]
+   36 | static dsrtos_result_t [01;35m[Kvalidate_timer_configuration[m[K(void);
+      |                        [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:24:24:[m[K [01;36m[Knote: [m[Kprevious declaration of '[01m[Kvalidate_timer_configuration[m[K' was here
+   24 | static dsrtos_result_t [01;36m[Kvalidate_timer_configuration[m[K(void);
+      |                        [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:37:24:[m[K [01;35m[Kwarning: [m[Kredundant redeclaration of '[01m[Kvalidate_uart_configuration[m[K' [[01;35m[K-Wredundant-decls[m[K]
+   37 | static dsrtos_result_t [01;35m[Kvalidate_uart_configuration[m[K(void);
+      |                        [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:25:24:[m[K [01;36m[Knote: [m[Kprevious declaration of '[01m[Kvalidate_uart_configuration[m[K' was here
+   25 | static dsrtos_result_t [01;36m[Kvalidate_uart_configuration[m[K(void);
+      |                        [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:96:[m[K [01;35m[Kwarning: [m[K"DSRTOS_BOOT_STAGE_CLOCK" redefined
+   96 | #define DSRTOS_BOOT_STAGE_CLOCK          (1U)
+      | 
+In file included from [01m[Ksrc/phase1/dsrtos_boot.c:1[m[K:
+[01m[Kinclude/phase1/dsrtos_boot.h:64:[m[K [01;36m[Knote: [m[Kthis is the location of the previous definition
+   64 | #define DSRTOS_BOOT_STAGE_CLOCK              (0U)
+      | 
+[01m[Ksrc/phase1/dsrtos_boot.c:250:1:[m[K [01;31m[Kerror: [m[Kexpected identifier or '[01m[K([m[K' before '[01m[K{[m[K' token
+  250 | [01;31m[K{[m[K
+      | [01;31m[K^[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:380:5:[m[K [01;35m[Kwarning: [m[K"/*" within comment [[01;35m[K-Wcomment[m[K]
+  380 |     /* Check if already initialized */
+      |      
+[01m[Ksrc/phase1/dsrtos_boot.c:381:5:[m[K [01;31m[Kerror: [m[Kexpected identifier or '[01m[K([m[K' before '[01m[Kif[m[K'
+  381 |     [01;31m[Kif[m[K ((ctrl->magic == DSRTOS_BOOT_MAGIC_NUMBER) && (ctrl->initialized == true)) {
+      |     [01;31m[K^~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:383:7:[m[K [01;31m[Kerror: [m[Kexpected identifier or '[01m[K([m[K' before '[01m[Kelse[m[K'
+  383 |     } [01;31m[Kelse[m[K {
+      |       [01;31m[K^~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:439:5:[m[K [01;31m[Kerror: [m[Kexpected identifier or '[01m[K([m[K' before '[01m[Kreturn[m[K'
+  439 |     [01;31m[Kreturn[m[K result;
+      |     [01;31m[K^~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:440:1:[m[K [01;31m[Kerror: [m[Kexpected identifier or '[01m[K([m[K' before '[01m[K}[m[K' token
+  440 | [01;31m[K}[m[K
+      | [01;31m[K^[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:21:24:[m[K [01;35m[Kwarning: [m[K'[01m[Kvalidate_boot_system[m[K' used but never defined
+   21 | static dsrtos_result_t [01;35m[Kvalidate_boot_system[m[K(void);
+      |                        [01;35m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:34:24:[m[K [01;35m[Kwarning: [m[K'[01m[Kvalidate_clock_configuration[m[K' declared '[01m[Kstatic[m[K' but never defined [[01;35m[K-Wunused-function[m[K]
+   34 | static dsrtos_result_t [01;35m[Kvalidate_clock_configuration[m[K(void);
+      |                        [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:35:24:[m[K [01;35m[Kwarning: [m[K'[01m[Kvalidate_interrupt_configuration[m[K' declared '[01m[Kstatic[m[K' but never defined [[01;35m[K-Wunused-function[m[K]
+   35 | static dsrtos_result_t [01;35m[Kvalidate_interrupt_configuration[m[K(void);
+      |                        [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:36:24:[m[K [01;35m[Kwarning: [m[K'[01m[Kvalidate_timer_configuration[m[K' declared '[01m[Kstatic[m[K' but never defined [[01;35m[K-Wunused-function[m[K]
+   36 | static dsrtos_result_t [01;35m[Kvalidate_timer_configuration[m[K(void);
+      |                        [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:37:24:[m[K [01;35m[Kwarning: [m[K'[01m[Kvalidate_uart_configuration[m[K' declared '[01m[Kstatic[m[K' but never defined [[01;35m[K-Wunused-function[m[K]
+   37 | static dsrtos_result_t [01;35m[Kvalidate_uart_configuration[m[K(void);
+      |                        [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:336:13:[m[K [01;35m[Kwarning: [m[K'[01m[Kupdate_boot_statistics[m[K' defined but not used [[01;35m[K-Wunused-function[m[K]
+  336 | static void [01;35m[Kupdate_boot_statistics[m[K(void)
+      |             [01;35m[K^~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:291:24:[m[K [01;35m[Kwarning: [m[K'[01m[Kexecute_boot_stage[m[K' defined but not used [[01;35m[K-Wunused-function[m[K]
+  291 | static dsrtos_result_t [01;35m[Kexecute_boot_stage[m[K(uint8_t stage_index)
+      |                        [01;35m[K^~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:220:24:[m[K [01;35m[Kwarning: [m[K'[01m[Kperform_early_hardware_init[m[K' defined but not used [[01;35m[K-Wunused-function[m[K]
+  220 | static dsrtos_result_t [01;35m[Kperform_early_hardware_init[m[K(void)
+      |                        [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[Ksrc/phase1/dsrtos_boot.c:182:24:[m[K [01;35m[Kwarning: [m[K'[01m[Kdetect_reset_cause[m[K' defined but not used [[01;35m[K-Wunused-function[m[K]
+  182 | static dsrtos_result_t [01;35m[Kdetect_reset_cause[m[K(void)
+      |                        [01;35m[K^~~~~~~~~~~~~~~~~~[m[K
+make: *** [Makefile:515: build/obj/dsrtos_boot.o] Error 1

@@ -1,0 +1,16 @@
+src/phase2/dsrtos_stats.c:96:16:dsrtos_stats_init	24	static
+src/phase2/dsrtos_stats.c:129:16:dsrtos_stats_update	32	static
+src/phase2/dsrtos_stats.c:174:16:dsrtos_stats_set_gauge	32	static
+src/phase2/dsrtos_stats.c:219:16:dsrtos_stats_get_kernel	32	static
+src/phase2/dsrtos_stats.c:247:16:dsrtos_stats_get_task	32	static
+src/phase2/dsrtos_stats.c:269:16:dsrtos_stats_get_memory	32	static
+src/phase2/dsrtos_stats.c:291:16:dsrtos_stats_get_scheduler	32	static
+src/phase2/dsrtos_stats.c:313:16:dsrtos_stats_reset	24	static
+src/phase2/dsrtos_stats.c:379:9:dsrtos_stats_cpu_usage	16	static
+src/phase2/dsrtos_stats.c:396:16:dsrtos_stats_get_entry	40	static
+src/phase2/dsrtos_stats.c:428:16:dsrtos_stats_register	32	static
+src/phase2/dsrtos_stats.c:460:16:dsrtos_stats_export	24	static
+src/phase2/dsrtos_stats.c:486:24:stats_find_entry	24	static
+src/phase2/dsrtos_stats.c:506:24:stats_allocate_entry	16	static
+src/phase2/dsrtos_stats.c:527:13:stats_update_cpu_usage	96	static
+src/phase2/dsrtos_stats.c:556:17:stats_get_ticks	16	static

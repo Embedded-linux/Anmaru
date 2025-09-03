@@ -1,0 +1,13 @@
+2025-09-01 23:13:06.461883: DSRTOS Dynamic Error Fixer Started
+2025-09-01 23:13:06.461984: Project root: .
+2025-09-01 23:13:06.462013: Creating backup...
+2025-09-01 23:13:06.471773: Backup created: backup_20250901_231306
+2025-09-01 23:13:06.471835: Starting dynamic error fixing cycle
+2025-09-01 23:13:06.471861: Fix iteration 1/10
+2025-09-01 23:13:06.577438: Found 0 errors to fix
+2025-09-01 23:13:06.577778: No recognizable errors found, but compilation failed
+2025-09-01 23:13:06.577905: Compilation output:
+2025-09-01 23:13:06.577955: DSTM32F407VG -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -DDSRTOS_BUILD_NUMBER=\"dev\" -DDSRTOS_BUILD_DATE=\"20250901_231306\" -Iinclude -Iinclude/phase1 -Iinclude/phase2 -Iinclude/common -Iinclude/hal -Iinclude/drivers -Wall -Wextra -Wpedantic -Wshadow -Wundef -Wcast-align -Wcast-qual -Wconversion -Wsign-conversion -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wswitch-default -Wswitch-enum -Wlogical-op -Wfloat-equal -Wwrite-strings -Wpointer-arith -Wstrict-overflow=5 -Wformat=2 -Wformat-truncation -Wnull-dereference -Wstack-usage=256 -Wno-unused-parameter -Wno-missing-field-initializers -fno-strict-aliasing -fno-builtin -ffreestanding -fno-common -ffunction-sections -fdata-sections -fstack-protector-strong -fstack-usage -fno-delete-null-pointer-checks -O0 -g3 -ggdb -DDEBUG -DDSRTOS_DEBUG_ENABLED=1 -DDSRTOS_ASSERT_ENABLED=1 -DDSRTOS_STATS_ENABLED=1 -std=c11 -fmessage-length=0 -fdiagnostics-color=always --specs=nano.specs -MMD -MP
+
+2025-09-01 23:13:06.578075: ERROR: Could not fix all compilation errors
+2025-09-01 23:13:06.578202: Backup available: backup_20250901_231306

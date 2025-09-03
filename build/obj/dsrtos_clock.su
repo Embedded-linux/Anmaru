@@ -1,0 +1,12 @@
+src/phase1/dsrtos_clock.c:169:24:configure_flash_wait_states	4	static
+src/phase1/dsrtos_clock.c:189:24:enable_hse_oscillator	16	static
+src/phase1/dsrtos_clock.c:210:24:configure_pll	16	static
+src/phase1/dsrtos_clock.c:250:24:switch_to_pll_clock	16	static
+src/phase1/dsrtos_clock.c:277:24:configure_bus_prescalers	16	static
+src/phase1/dsrtos_clock.c:297:24:wait_for_clock_ready	24	static
+src/phase1/dsrtos_clock.c:325:13:update_system_clock_frequencies	136	static
+src/phase1/dsrtos_clock.c:385:17:dsrtos_clock_init	16	static
+src/phase1/dsrtos_clock.c:534:18:dsrtos_clock_enable_peripheral	24	static
+src/phase1/dsrtos_clock.c:659:17:dsrtos_clock_get_frequencies	24	static
+src/phase1/dsrtos_clock.c:688:17:dsrtos_clock_get_stats	24	static
+src/phase1/dsrtos_clock.c:718:10:dsrtos_clock_get_sysclk_frequency	16	static
