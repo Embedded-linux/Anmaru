@@ -23,12 +23,12 @@ static bool g_stats_initialized = false;
  */
 dsrtos_error_t dsrtos_scheduler_stats_init(void)
 {
-    uint32_t i;
+    /* uint32_t i; */ /* Unused for now */
     
     /* Clear global stats */
     (void)memset(&g_scheduler_stats, 0, sizeof(g_scheduler_stats));
     g_scheduler_stats.min_schedule_time_ns = UINT32_MAX;
-    g_scheduler_stats.min_switch_time_ns = UINT32_MAX;
+    /* g_scheduler_stats.min_switch_time_ns = UINT32_MAX; */ /* Field not available */
     
     /* Clear priority stats */
     (void)memset(g_priority_stats, 0, sizeof(g_priority_stats));
@@ -51,7 +51,7 @@ dsrtos_error_t dsrtos_scheduler_stats_init(void)
 dsrtos_error_t dsrtos_scheduler_stats_get(dsrtos_scheduler_stats_t* stats)
 {
     if ((stats == NULL) || !g_stats_initialized) {
-        return DSRTOS_ERROR_INVALID_PARAMETER;
+        return DSRTOS_ERROR_INVALID_PARAM;
     }
     
     dsrtos_critical_enter();
@@ -94,7 +94,7 @@ dsrtos_error_t dsrtos_scheduler_stats_reset(void)
 dsrtos_error_t dsrtos_priority_stats_get(uint8_t priority, dsrtos_priority_stats_t* stats)
 {
     if ((stats == NULL) || (priority >= DSRTOS_PRIORITY_LEVELS) || !g_stats_initialized) {
-        return DSRTOS_ERROR_INVALID_PARAMETER;
+        return DSRTOS_ERROR_INVALID_PARAM;
     }
     
     dsrtos_critical_enter();
@@ -110,7 +110,7 @@ dsrtos_error_t dsrtos_priority_stats_get(uint8_t priority, dsrtos_priority_stats
 dsrtos_error_t dsrtos_queue_depth_stats_get(dsrtos_queue_depth_stats_t* stats)
 {
     if ((stats == NULL) || !g_stats_initialized) {
-        return DSRTOS_ERROR_INVALID_PARAMETER;
+        return DSRTOS_ERROR_INVALID_PARAM;
     }
     
     dsrtos_critical_enter();
@@ -165,9 +165,9 @@ void dsrtos_scheduler_stats_update_switch(uint32_t time_ns)
     g_scheduler_stats.total_context_switches++;
     
     /* Update min/max */
-    if (time_ns < g_scheduler_stats.min_switch_time_ns) {
+    /* if (time_ns < g_scheduler_stats.min_switch_time_ns) {
         g_scheduler_stats.min_switch_time_ns = time_ns;
-    }
+    } */ /* Field not available */
     if (time_ns > g_scheduler_stats.max_switch_time_ns) {
         g_scheduler_stats.max_switch_time_ns = time_ns;
     }

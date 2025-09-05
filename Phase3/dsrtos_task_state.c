@@ -170,7 +170,7 @@ dsrtos_error_t dsrtos_state_transition(dsrtos_tcb_t *tcb,
     
     /* Verify TCB integrity */
     if (dsrtos_task_validate_tcb(tcb) != DSRTOS_SUCCESS) {
-        return DSRTOS_ERROR_CORRUPTED;
+        return DSRTOS_ERROR_CORRUPTION;
     }
     
     old_state = tcb->state;
@@ -244,7 +244,7 @@ dsrtos_error_t dsrtos_state_get(const dsrtos_tcb_t *tcb,
     
     /* Verify TCB integrity */
     if (dsrtos_task_validate_tcb(tcb) != DSRTOS_SUCCESS) {
-        return DSRTOS_ERROR_CORRUPTED;
+        return DSRTOS_ERROR_CORRUPTION;
     }
     
     *state = tcb->state;

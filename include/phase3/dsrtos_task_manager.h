@@ -23,8 +23,10 @@ extern "C" {
 #include <stdint.h>
 #include <stdbool.h>
 #include <stddef.h>
-#include "../common/dsrtos_error.h"
 #include "../common/dsrtos_types.h"
+#include "../common/dsrtos_error.h"
+
+/* dsrtos_task_state_t is defined in dsrtos_types.h - no duplicate definition needed */
 
 /*==============================================================================
  * CONSTANTS AND CONFIGURATION
@@ -55,6 +57,25 @@ typedef enum {
     DSRTOS_TASK_PRIORITY_CRITICAL  = 4U,
     DSRTOS_TASK_PRIORITY_MAX       = 5U
 } dsrtos_task_priority_t;
+
+/*==============================================================================
+ * SCHEDULER CONFIGURATION
+ *============================================================================*/
+
+/* Scheduler types */
+typedef enum {
+    DSRTOS_SCHEDULER_TYPE_PRIORITY = 0U,
+    DSRTOS_SCHEDULER_TYPE_ROUND_ROBIN = 1U,
+    DSRTOS_SCHEDULER_TYPE_EDF = 2U,
+    DSRTOS_SCHEDULER_TYPE_MAX = 3U
+} dsrtos_scheduler_type_t;
+
+typedef struct {
+    dsrtos_scheduler_type_t type;
+    uint32_t time_slice_us;
+    bool preemption_enabled;
+    bool priority_inheritance;
+} dsrtos_scheduler_config_t;
 
 /*==============================================================================
  * TASK ENTRY POINT
@@ -260,7 +281,8 @@ dsrtos_error_t dsrtos_task_manager_get_task_info(uint32_t task_id, dsrtos_tcb_t*
  * @param index Task index
  * @return Pointer to task control block, NULL if not found
  */
-dsrtos_tcb_t* dsrtos_task_get_by_index(uint32_t index);
+/* Forward declaration - defined in dsrtos_kernel.h */
+/* dsrtos_tcb_t* dsrtos_task_get_by_index(uint32_t index); */
 
 /**
  * @brief Get current running task
@@ -317,7 +339,7 @@ dsrtos_error_t dsrtos_task_manager_shutdown(void);
  * @brief Initialize task scheduler
  * @return DSRTOS_SUCCESS on success, error code on failure
  */
-dsrtos_error_t dsrtos_scheduler_init(void);
+dsrtos_error_t dsrtos_scheduler_init(const dsrtos_scheduler_config_t *config);
 
 /**
  * @brief Start task scheduler
@@ -451,7 +473,8 @@ dsrtos_error_t dsrtos_task_suspend(dsrtos_tcb_t* tcb);
  * @brief Get system time (Phase3 compatibility)
  * @return Current system time in ticks
  */
-uint64_t dsrtos_get_system_time(void);
+/* Forward declaration - defined in dsrtos_kernel.h */
+/* uint64_t dsrtos_get_system_time(void); */
 
 /**
  * @brief Task exit function (Phase3 compatibility)

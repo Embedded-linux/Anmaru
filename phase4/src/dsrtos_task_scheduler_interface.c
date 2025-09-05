@@ -687,7 +687,7 @@ dsrtos_error_t dsrtos_ready_queue_repair(dsrtos_ready_queue_t* queue)
     queue->magic_end = DSRTOS_QUEUE_MAGIC;
     
     /* Rebuild bitmap from lists */
-    (void)memset((void*)queue->priority_bitmap, 0, sizeof(queue->priority_bitmap));
+    (void)memset((volatile void*)queue->priority_bitmap, 0, sizeof(queue->priority_bitmap));
     queue->stats.total_tasks = 0U;
     
     for (i = 0U; i < DSRTOS_PRIORITY_LEVELS; i++) {
@@ -730,8 +730,8 @@ dsrtos_error_t dsrtos_ready_queue_repair(dsrtos_ready_queue_t* queue)
     }
     
     /* Sync mirror bitmap */
-    (void)memcpy((void*)queue->priority_bitmap_mirror, 
-                 (const void*)queue->priority_bitmap,
+        (void)memcpy((volatile void*)queue->priority_bitmap_mirror,
+                 (const volatile void*)queue->priority_bitmap,
                  sizeof(queue->priority_bitmap));
     
     /* Verify repair */
@@ -758,7 +758,7 @@ void dsrtos_priority_bitmap_set(volatile uint32_t* bitmap, uint8_t priority)
     uint32_t bit_mask;
     
     /* MISRA-C:2012 Rule 14.3: Defensive programming */
-    if ((bitmap == NULL) || (priority >= DSRTOS_PRIORITY_LEVELS)) {
+    if ((bitmap == NULL) || ((uint16_t)priority >= DSRTOS_PRIORITY_LEVELS)) {
         DSRTOS_ASSERT(false);
         return;
     }
@@ -778,7 +778,7 @@ void dsrtos_priority_bitmap_clear(volatile uint32_t* bitmap, uint8_t priority)
     uint32_t word_index;
     uint32_t bit_mask;
     
-    if ((bitmap == NULL) || (priority >= DSRTOS_PRIORITY_LEVELS)) {
+    if ((bitmap == NULL) || ((uint16_t)priority >= DSRTOS_PRIORITY_LEVELS)) {
         DSRTOS_ASSERT(false);
         return;
     }
@@ -827,7 +827,7 @@ bool dsrtos_priority_bitmap_is_set(const volatile uint32_t* bitmap, uint8_t prio
     uint32_t word_index;
     uint32_t bit_mask;
     
-    if ((bitmap == NULL) || (priority >= DSRTOS_PRIORITY_LEVELS)) {
+    if ((bitmap == NULL) || ((uint16_t)priority >= DSRTOS_PRIORITY_LEVELS)) {
         return false;
     }
     
@@ -937,7 +937,7 @@ static bool validate_tcb(const dsrtos_tcb_t* task)
     }
     
     /* Validate priority */
-    if (task->effective_priority >= DSRTOS_PRIORITY_LEVELS) {
+    if ((uint16_t)task->effective_priority >= DSRTOS_PRIORITY_LEVELS) {
         return false;
     }
     
@@ -954,7 +954,7 @@ static bool validate_tcb(const dsrtos_tcb_t* task)
  */
 static bool validate_priority(uint8_t priority)
 {
-    return priority < DSRTOS_PRIORITY_LEVELS;
+    return (uint16_t)priority < DSRTOS_PRIORITY_LEVELS;
 }
 
 /**

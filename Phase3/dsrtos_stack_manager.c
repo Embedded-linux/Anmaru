@@ -36,15 +36,7 @@
  *============================================================================*/
 
 /* Stack statistics */
-typedef struct {
-    uint32_t total_stacks;
-    uint32_t total_stack_memory;
-    uint32_t overflow_detections;
-    uint32_t underflow_detections;
-    uint32_t guard_violations;
-    uint32_t watermark_checks;
-    uint32_t peak_total_usage;
-} stack_manager_stats_t;
+/* stack_manager_stats_t - defined in header */
 
 /* Stack monitor entry */
 typedef struct {
@@ -127,7 +119,7 @@ dsrtos_error_t dsrtos_stack_init(dsrtos_tcb_t *tcb,
     }
     
     /* Check minimum size */
-    if (stack_size < DSRTOS_MIN_STACK_SIZE) {
+    if (stack_size < DSRTOS_TASK_MIN_STACK_SIZE) {
         return DSRTOS_ERROR_INVALID_PARAM;
     }
     
@@ -239,7 +231,7 @@ dsrtos_error_t dsrtos_stack_get_usage(const dsrtos_tcb_t *tcb,
     
     /* Check if dangerously low */
     if (*free < STACK_MIN_FREE_THRESHOLD) {
-        return DSRTOS_ERROR_LOW_RESOURCE;
+        return DSRTOS_ERROR_NO_RESOURCES;
     }
     
     return DSRTOS_SUCCESS;
@@ -314,7 +306,7 @@ dsrtos_error_t dsrtos_stack_register_overflow_hook(dsrtos_stack_overflow_hook_t 
  * @param stats Pointer to store statistics
  * @return Error code
  */
-dsrtos_error_t dsrtos_stack_get_stats(stack_manager_stats_t *stats)
+/* dsrtos_error_t dsrtos_stack_get_stats(stack_manager_stats_t *stats)
 {
     if (stats == NULL) {
         return DSRTOS_ERROR_INVALID_PARAM;
@@ -325,7 +317,7 @@ dsrtos_error_t dsrtos_stack_get_stats(stack_manager_stats_t *stats)
     dsrtos_critical_exit();
     
     return DSRTOS_SUCCESS;
-}
+} */
 
 /*==============================================================================
  * STATIC FUNCTIONS

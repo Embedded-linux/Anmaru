@@ -23,24 +23,7 @@ extern "C" {
  * ERROR CODES
  *============================================================================*/
 
-typedef enum {
-    DSRTOS_SUCCESS                = 0,
-    DSRTOS_ERROR_INVALID_PARAM    = -1,
-    DSRTOS_ERROR_NO_MEMORY        = -2,
-    DSRTOS_ERROR_NO_RESOURCE      = -3,
-    DSRTOS_ERROR_INVALID_STATE    = -4,
-    DSRTOS_ERROR_TIMEOUT          = -5,
-    DSRTOS_ERROR_NOT_PERMITTED    = -6,
-    DSRTOS_ERROR_NOT_INITIALIZED  = -7,
-    DSRTOS_ERROR_ALREADY_INITIALIZED = -8,
-    DSRTOS_ERROR_ALREADY_STARTED  = -9,
-    DSRTOS_ERROR_CORRUPTED        = -10,
-    DSRTOS_ERROR_STACK_OVERFLOW   = -11,
-    DSRTOS_ERROR_LIMIT_EXCEEDED   = -12,
-    DSRTOS_ERROR_NOT_ENABLED      = -13,
-    DSRTOS_ERROR_LOW_RESOURCE     = -14,
-    DSRTOS_ERROR_INTERNAL         = -15
-} dsrtos_error_t;
+/* dsrtos_error_t is defined in common/dsrtos_error.h */
 
 /*==============================================================================
  * SYSTEM TYPES
@@ -58,6 +41,46 @@ typedef uint32_t dsrtos_queue_id_t;
 
 /* Handle types */
 typedef void* dsrtos_handle_t;
+
+/*==============================================================================
+ * TASK FLAGS
+ *============================================================================*/
+
+#define DSRTOS_TASK_FLAG_REAL_TIME          (0x01U)
+#define DSRTOS_TASK_FLAG_PRIORITY_INHERIT   (0x02U)
+#define DSRTOS_TASK_FLAG_STACK_CHECK        (0x04U)
+
+/*==============================================================================
+ * STACK CONSTANTS
+ *============================================================================*/
+
+#define DSRTOS_STACK_PATTERN                (0xA5A5A5A5U)
+#define DSRTOS_STACK_CANARY_VALUE           (0xDEADBEEFU)
+
+/* Task limits */
+#define DSRTOS_MAX_TASKS                    (32U)
+#define DSRTOS_MAX_PRIORITY                 (31U)
+
+/* Error constants */
+#define DSRTOS_ERROR_NOT_ENABLED            (-13)
+#define DSRTOS_INVALID_PARAM                (-1)
+#define DSRTOS_NOT_FOUND                    (-16)
+
+/*==============================================================================
+ * TASK STATES
+ *============================================================================*/
+
+typedef enum {
+    DSRTOS_TASK_STATE_INVALID    = 0U,
+    DSRTOS_TASK_STATE_CREATED    = 1U,
+    DSRTOS_TASK_STATE_READY      = 2U,
+    DSRTOS_TASK_STATE_RUNNING    = 3U,
+    DSRTOS_TASK_STATE_BLOCKED    = 4U,
+    DSRTOS_TASK_STATE_SUSPENDED  = 5U,
+    DSRTOS_TASK_STATE_TERMINATED = 6U,
+    DSRTOS_TASK_STATE_DORMANT    = 7U,
+    DSRTOS_TASK_STATE_MAX        = 8U
+} dsrtos_task_state_t;
 
 #ifdef __cplusplus
 }

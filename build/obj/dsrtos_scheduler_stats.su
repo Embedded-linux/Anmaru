@@ -1,0 +1,10 @@
+phase4/src/dsrtos_scheduler_stats.c:24:16:dsrtos_scheduler_stats_init	8	static
+phase4/src/dsrtos_scheduler_stats.c:51:16:dsrtos_scheduler_stats_get	16	static
+phase4/src/dsrtos_scheduler_stats.c:67:16:dsrtos_scheduler_stats_reset	8	static
+phase4/src/dsrtos_scheduler_stats.c:94:16:dsrtos_priority_stats_get	24	static
+phase4/src/dsrtos_scheduler_stats.c:110:16:dsrtos_queue_depth_stats_get	24	static
+phase4/src/dsrtos_scheduler_stats.c:126:6:dsrtos_scheduler_stats_update_schedule	72	static
+phase4/src/dsrtos_scheduler_stats.c:157:6:dsrtos_scheduler_stats_update_switch	72	static
+phase4/src/dsrtos_scheduler_stats.c:188:6:dsrtos_scheduler_stats_update_preemption	4	static
+phase4/src/dsrtos_scheduler_stats.c:198:6:dsrtos_scheduler_stats_update_migration	4	static
+phase4/src/dsrtos_scheduler_stats.c:208:6:dsrtos_scheduler_stats_update_queue_depth	72	static

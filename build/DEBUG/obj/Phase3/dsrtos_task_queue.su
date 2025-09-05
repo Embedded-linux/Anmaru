@@ -1,0 +1,15 @@
+Phase3/dsrtos_task_queue.c:115:16:dsrtos_queue_init	16	static
+Phase3/dsrtos_task_queue.c:145:16:dsrtos_queue_ready_insert	24	static
+Phase3/dsrtos_task_queue.c:189:16:dsrtos_queue_ready_remove	24	static
+Phase3/dsrtos_task_queue.c:225:15:dsrtos_queue_ready_get_highest	24	static
+Phase3/dsrtos_task_queue.c:253:16:dsrtos_queue_blocked_insert	48	static
+Phase3/dsrtos_task_queue.c:305:16:dsrtos_queue_blocked_remove	24	static
+Phase3/dsrtos_task_queue.c:355:10:dsrtos_queue_process_delayed	40	static
+Phase3/dsrtos_task_queue.c:410:16:dsrtos_queue_get_stats	16	static
+Phase3/dsrtos_task_queue.c:440:22:allocate_node	24	static
+Phase3/dsrtos_task_queue.c:458:13:free_node	32	static
+Phase3/dsrtos_task_queue.c:478:13:insert_ready_queue	24	static
+Phase3/dsrtos_task_queue.c:509:13:remove_ready_queue	24	static
+Phase3/dsrtos_task_queue.c:547:13:insert_delayed_sorted	48	static
+Phase3/dsrtos_task_queue.c:594:16:find_highest_ready_priority	16	static
+Phase3/dsrtos_task_queue.c:613:13:update_ready_bitmap	24	static

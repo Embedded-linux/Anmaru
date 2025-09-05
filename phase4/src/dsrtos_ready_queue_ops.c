@@ -11,7 +11,7 @@
 #include "dsrtos_ready_queue_ops.h"
 #include "dsrtos_critical.h"
 #include "dsrtos_assert.h"
-#include "dsrtos_trace.h"
+#include "dsrtos_config.h"
 #include <string.h>
 
 /* Global operations statistics */
@@ -25,12 +25,12 @@ dsrtos_error_t dsrtos_queue_iterator_init(
     dsrtos_ready_queue_t* queue)
 {
     if ((iter == NULL) || (queue == NULL)) {
-        return DSRTOS_ERROR_INVALID_PARAMETER;
+        return DSRTOS_ERROR_INVALID_PARAM;
     }
     
     /* Validate queue */
     if (!dsrtos_ready_queue_validate(queue)) {
-        return DSRTOS_ERROR_CORRUPTED;
+        return DSRTOS_ERROR_CORRUPTION;
     }
     
     (void)memset(iter, 0, sizeof(dsrtos_queue_iterator_t));
@@ -110,7 +110,7 @@ dsrtos_error_t dsrtos_ready_queue_rebalance(dsrtos_ready_queue_t* queue)
     uint32_t removed_count = 0U;
     
     if (queue == NULL) {
-        return DSRTOS_ERROR_INVALID_PARAMETER;
+        return DSRTOS_ERROR_INVALID_PARAM;
     }
     
     DSRTOS_TRACE_QUEUE("Rebalancing ready queue");
@@ -182,7 +182,7 @@ dsrtos_error_t dsrtos_ready_queue_migrate(
     dsrtos_error_t result;
     
     if ((src_queue == NULL) || (dst_queue == NULL) || (task == NULL)) {
-        return DSRTOS_ERROR_INVALID_PARAMETER;
+        return DSRTOS_ERROR_INVALID_PARAM;
     }
     
     DSRTOS_TRACE_QUEUE("Migrating task %u between queues", task->task_id);
@@ -202,7 +202,7 @@ dsrtos_error_t dsrtos_ready_queue_migrate(
     }
     
     /* Update statistics */
-    task->migrations++;
+    /* task->migrations++; */ /* Field not available in current TCB */
     g_queue_ops_stats.migration_count++;
     
     return DSRTOS_SUCCESS;
@@ -216,7 +216,7 @@ dsrtos_error_t dsrtos_ready_queue_clear(dsrtos_ready_queue_t* queue)
     uint32_t i;
     
     if (queue == NULL) {
-        return DSRTOS_ERROR_INVALID_PARAMETER;
+        return DSRTOS_ERROR_INVALID_PARAM;
     }
     
     DSRTOS_TRACE_QUEUE("Clearing ready queue");
@@ -232,8 +232,8 @@ dsrtos_error_t dsrtos_ready_queue_clear(dsrtos_ready_queue_t* queue)
     }
     
     /* Clear bitmaps */
-    (void)memset((void*)queue->priority_bitmap, 0, sizeof(queue->priority_bitmap));
-    (void)memset((void*)queue->priority_bitmap_mirror, 0, sizeof(queue->priority_bitmap_mirror));
+    (void)memset((volatile void*)queue->priority_bitmap, 0, sizeof(queue->priority_bitmap));
+    (void)memset((volatile void*)queue->priority_bitmap_mirror, 0, sizeof(queue->priority_bitmap_mirror));
     
     /* Reset statistics */
     queue->stats.total_tasks = 0U;
@@ -252,7 +252,7 @@ dsrtos_error_t dsrtos_ready_queue_get_stats(
     dsrtos_queue_ops_stats_t* stats)
 {
     if ((queue == NULL) || (stats == NULL)) {
-        return DSRTOS_ERROR_INVALID_PARAMETER;
+        return DSRTOS_ERROR_INVALID_PARAM;
     }
     
     dsrtos_critical_enter();

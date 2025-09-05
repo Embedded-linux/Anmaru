@@ -216,7 +216,7 @@ C_SOURCES = \
     $(STARTUP_C_SOURCES)
 
 ASM_SOURCES = \
-    phase4/src/dsrtos_context_switch.S
+    # phase4/src/dsrtos_context_switch.S  # Using C implementation instead
 
 ALL_SOURCES = \
     $(C_SOURCES) \

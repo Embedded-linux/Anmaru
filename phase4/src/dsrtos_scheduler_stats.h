@@ -17,6 +17,7 @@ extern "C" {
 
 #include <stdint.h>
 #include "dsrtos_types.h"
+#include "dsrtos_error.h"
 
 /* Scheduler statistics structure */
 typedef struct {

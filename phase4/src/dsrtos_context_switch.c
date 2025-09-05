@@ -178,7 +178,7 @@ void dsrtos_context_switch(dsrtos_tcb_t* next_task)
     /* Validate task TCB */
     if (next_task->magic_number != DSRTOS_TCB_MAGIC) {
         DSRTOS_TRACE_ERROR("Invalid task TCB in context switch");
-        context_switch_error_handler(DSRTOS_ERROR_CORRUPTION);
+        context_switch_error_handler((uint32_t)DSRTOS_ERROR_CORRUPTION);
         return;
     }
     
@@ -261,7 +261,7 @@ void* dsrtos_context_save(dsrtos_tcb_t* task)
     if ((sp < (uint32_t*)task->stack_base) ||
         (sp > (uint32_t*)((uint8_t*)task->stack_base + task->stack_size))) {
         DSRTOS_TRACE_ERROR("Stack overflow detected for task %u", task->task_id);
-        context_switch_error_handler(DSRTOS_ERROR_STACK_OVERFLOW);
+        context_switch_error_handler((uint32_t)DSRTOS_ERROR_STACK_OVERFLOW);
         return NULL;
     }
     
@@ -302,7 +302,7 @@ void* dsrtos_context_restore(dsrtos_tcb_t* task)
     /* Validate stack integrity */
     if (!context_validate_stack(task)) {
         DSRTOS_TRACE_ERROR("Stack corruption detected for task %u", task->task_id);
-        context_switch_error_handler(DSRTOS_ERROR_CORRUPTION);
+        context_switch_error_handler((uint32_t)DSRTOS_ERROR_CORRUPTION);
         return NULL;
     }
     
@@ -349,8 +349,8 @@ void dsrtos_switch_context_handler(uint32_t* current_sp)
     g_context_control.state = CONTEXT_STATE_SAVE;
     
     /* Get current and next tasks */
-    current = (dsrtos_tcb_t*)g_current_task;
-    next = (dsrtos_tcb_t*)g_next_task;
+    current = (dsrtos_tcb_t*)(volatile void*)g_current_task;
+    next = (dsrtos_tcb_t*)(volatile void*)g_next_task;
     
     /* Save current context if not first switch */
     if (current != NULL) {
@@ -380,7 +380,7 @@ void dsrtos_switch_context_handler(uint32_t* current_sp)
     if (next == NULL) {
         /* No next task - use idle task */
 
-        next = g_idle_task;
+        next = (dsrtos_tcb_t*)(volatile void*)g_idle_task;
         
         if (next == NULL) {
             /* Fatal error - no tasks to run */
@@ -574,12 +574,12 @@ static void context_switch_error_handler(uint32_t error_code)
     
     /* Attempt recovery based on error type */
     switch (error_code) {
-        case DSRTOS_ERROR_STACK_OVERFLOW:
+        case (uint32_t)DSRTOS_ERROR_STACK_OVERFLOW:
             /* Fatal - cannot recover from stack overflow */
             dsrtos_panic("Stack overflow in context switch");
             break;
             
-        case DSRTOS_ERROR_CORRUPTION:
+        case (uint32_t)(uint32_t)DSRTOS_ERROR_CORRUPTION:
             /* Try to switch to idle task */
     
             if (g_idle_task != NULL) {

@@ -1,0 +1,12 @@
+Phase3/dsrtos_task_state.c:140:16:dsrtos_state_init	8	static
+Phase3/dsrtos_task_state.c:154:16:dsrtos_state_transition	32	static
+Phase3/dsrtos_task_state.c:237:16:dsrtos_state_get	16	static
+Phase3/dsrtos_task_state.c:260:13:dsrtos_state_get_name	16	static
+Phase3/dsrtos_task_state.c:273:6:dsrtos_state_is_runnable	16	static
+Phase3/dsrtos_task_state.c:288:6:dsrtos_state_is_blocked	16	static
+Phase3/dsrtos_task_state.c:303:16:dsrtos_state_register_hook	16	static
+Phase3/dsrtos_task_state.c:314:16:dsrtos_state_get_stats	16	static
+Phase3/dsrtos_task_state.c:341:13:is_transition_valid	24	static
+Phase3/dsrtos_task_state.c:362:13:record_transition	24	static
+Phase3/dsrtos_task_state.c:386:23:perform_state_actions	24	static
+Phase3/dsrtos_task_state.c:449:13:update_task_timing	48	static

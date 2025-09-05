@@ -56,7 +56,9 @@ extern "C" {
  * CONSTANTS
  *============================================================================*/
 /* Priority levels - MISRA-C:2012 Rule 2.5: All macros used */
+#ifndef DSRTOS_PRIORITY_LEVELS
 #define DSRTOS_PRIORITY_LEVELS          (256U)
+#endif
 #define DSRTOS_IDLE_PRIORITY           (0U)
 #define DSRTOS_HIGHEST_PRIORITY        (255U)
 #define DSRTOS_DEFAULT_PRIORITY        (128U)
@@ -74,7 +76,9 @@ extern "C" {
 #define DSRTOS_MAX_TIME_SLICE          (100U)
 
 /* Safety thresholds */
+#ifndef DSRTOS_MAX_PREEMPTION_DEPTH
 #define DSRTOS_MAX_PREEMPTION_DEPTH    (16U)
+#endif
 #define DSRTOS_MAX_INHERITANCE_CHAIN   (8U)
 #define DSRTOS_WATCHDOG_CYCLES         (1000000U)
 

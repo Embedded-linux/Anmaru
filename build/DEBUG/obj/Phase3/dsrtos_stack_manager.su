@@ -1,0 +1,12 @@
+Phase3/dsrtos_stack_manager.c:81:16:dsrtos_stack_manager_init	8	static
+Phase3/dsrtos_stack_manager.c:101:16:dsrtos_stack_init	48	static
+Phase3/dsrtos_stack_manager.c:178:16:dsrtos_stack_check	24	static
+Phase3/dsrtos_stack_manager.c:215:16:dsrtos_stack_get_usage	32	static
+Phase3/dsrtos_stack_manager.c:246:16:dsrtos_stack_get_watermark	24	static
+Phase3/dsrtos_stack_manager.c:272:16:dsrtos_stack_check_all	24	static
+Phase3/dsrtos_stack_manager.c:298:16:dsrtos_stack_register_overflow_hook	16	static
+Phase3/dsrtos_stack_manager.c:331:17:calculate_stack_usage	32	static
+Phase3/dsrtos_stack_manager.c:356:23:check_stack_guards	40	static
+Phase3/dsrtos_stack_manager.c:385:13:update_watermark	32	static
+Phase3/dsrtos_stack_manager.c:416:17:find_stack_watermark	32	static
+Phase3/dsrtos_stack_manager.c:437:13:handle_stack_overflow	24	static

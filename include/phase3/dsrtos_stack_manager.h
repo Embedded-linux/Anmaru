@@ -20,6 +20,7 @@ extern "C" {
 #include <stdint.h>
 #include <stdbool.h>
 #include "dsrtos_types.h"
+#include "dsrtos_error.h"
 #include "dsrtos_task_manager.h"
 
 /*==============================================================================

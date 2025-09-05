@@ -285,7 +285,8 @@ typedef enum {
     DSRTOS_TASK_STATE_BLOCKED    = 4U,    /**< Task blocked waiting for resource */
     DSRTOS_TASK_STATE_SUSPENDED  = 5U,    /**< Task suspended by user */
     DSRTOS_TASK_STATE_TERMINATED = 6U,    /**< Task completed execution */
-    DSRTOS_TASK_STATE_MAX        = 7U     /**< Maximum task state value */
+    DSRTOS_TASK_STATE_DORMANT    = 7U,    /**< Task in dormant state */
+    DSRTOS_TASK_STATE_MAX        = 8U     /**< Maximum task state value */
 } dsrtos_task_state_t;
 
 /**

@@ -1,0 +1,13 @@
+include/common/core_cm4.h:52:20:__enable_irq	4	static
+include/common/core_cm4.h:56:20:__disable_irq	4	static
+include/common/core_cm4.h:60:24:__get_PRIMASK	16	static
+phase4/src/dsrtos_task_scheduler_interface.h:464:20:dsrtos_ready_queue_lock	24	static
+phase4/src/dsrtos_task_scheduler_interface.h:485:20:dsrtos_ready_queue_unlock	16	static
+phase4/src/dsrtos_ready_queue_ops.c:23:16:dsrtos_queue_iterator_init	16	static
+phase4/src/dsrtos_ready_queue_ops.c:55:15:dsrtos_queue_iterator_next	32	static
+phase4/src/dsrtos_ready_queue_ops.c:104:16:dsrtos_ready_queue_rebalance	40	static
+phase4/src/dsrtos_ready_queue_ops.c:177:16:dsrtos_ready_queue_migrate	32	static
+phase4/src/dsrtos_ready_queue_ops.c:214:16:dsrtos_ready_queue_clear	24	static
+phase4/src/dsrtos_ready_queue_ops.c:250:16:dsrtos_ready_queue_get_stats	24	static
+phase4/src/dsrtos_ready_queue_ops.c:268:6:dsrtos_ready_queue_contains	32	static
+phase4/src/dsrtos_ready_queue_ops.c:302:10:dsrtos_ready_queue_count_at_priority	24	static

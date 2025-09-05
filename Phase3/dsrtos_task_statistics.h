@@ -56,6 +56,14 @@ typedef struct {
     uint32_t jitter_max;
 } task_perf_metrics_t;
 
+/* Task statistics */
+typedef struct {
+    task_perf_metrics_t performance;
+    uint32_t state_transitions;
+    uint32_t last_activation_time;
+    uint32_t total_activations;
+} dsrtos_task_stats_t;
+
 /* System-wide statistics */
 typedef struct {
     cpu_load_stats_t cpu_load;

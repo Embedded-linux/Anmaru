@@ -1,0 +1,8 @@
+phase4/src/dsrtos_scheduler_decision.c:42:16:dsrtos_scheduler_decision_init	8	static
+phase4/src/dsrtos_scheduler_decision.c:83:16:dsrtos_scheduler_decision_deinit	4	static
+phase4/src/dsrtos_scheduler_decision.c:99:26:dsrtos_scheduler_make_decision	96	static
+phase4/src/dsrtos_scheduler_decision.c:190:6:dsrtos_scheduler_should_preempt	32	static
+phase4/src/dsrtos_scheduler_decision.c:235:10:dsrtos_scheduler_calculate_quantum	24	static
+phase4/src/dsrtos_scheduler_decision.c:279:6:dsrtos_scheduler_update_metrics	24	static
+phase4/src/dsrtos_scheduler_decision.c:302:16:dsrtos_scheduler_set_weights	16	static
+phase4/src/dsrtos_scheduler_decision.c:320:10:dsrtos_scheduler_evaluate_task_score	40	static

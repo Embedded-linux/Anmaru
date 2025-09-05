@@ -265,7 +265,7 @@ dsrtos_error_t dsrtos_queue_blocked_insert(dsrtos_tcb_t *tcb, uint32_t timeout)
     node = allocate_node();
     if (node == NULL) {
         dsrtos_critical_exit();
-        return DSRTOS_ERROR_NO_RESOURCE;
+        return DSRTOS_ERROR_NO_RESOURCES;
     }
     
     node->tcb = tcb;

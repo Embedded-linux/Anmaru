@@ -356,4 +356,12 @@ typedef struct {
 #define SCB_ICSR_PENDSVSET_Pos          28U
 #define SCB_ICSR_PENDSVSET_Msk          (0x1UL << SCB_ICSR_PENDSVSET_Pos)
 
+/* Additional CMSIS functions */
+__attribute__((always_inline)) static inline uint32_t __get_IPSR(void)
+{
+  uint32_t result;
+  __asm volatile ("MRS %0, ipsr" : "=r" (result) );
+  return(result);
+}
+
 #endif /* CORE_CM4_H */

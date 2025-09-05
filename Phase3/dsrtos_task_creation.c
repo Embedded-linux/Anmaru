@@ -19,6 +19,7 @@
 #include "dsrtos_critical.h"
 #include "dsrtos_memory.h"
 #include "dsrtos_port.h"
+#include "dsrtos_types.h"
 #include <string.h>
 
 /*==============================================================================
@@ -30,6 +31,24 @@
 #define STACK_ALIGNMENT         (8U)
 #define TASK_NAME_PREFIX        "Task_"
 #define MAX_RESTART_COUNT       (3U)
+
+/* Stack constants */
+#define DSRTOS_STACK_PATTERN         (0xA5A5A5A5U)
+#define DSRTOS_STACK_CANARY_VALUE    (0xDEADBEEFU)
+
+/* Task flags */
+#define DSRTOS_TASK_FLAG_REAL_TIME   (0x01U)
+#define DSRTOS_TASK_FLAG_NO_DELETE   (0x02U)
+
+/* Priority constants */
+#define DSRTOS_MAX_PRIORITY          (31U)
+
+/* Time slice constants */
+#define DSRTOS_DEFAULT_TIME_SLICE    (10U)
+
+/* Error constants */
+#define DSRTOS_ERROR_NOT_PERMITTED   (-6)
+#define DSRTOS_ERROR_LIMIT_EXCEEDED  (-12)
 
 /*==============================================================================
  * TYPE DEFINITIONS
@@ -50,17 +69,7 @@ typedef struct {
     dsrtos_tcb_t *owner;
 } stack_pool_entry_t;
 
-/* Task creation statistics */
-typedef struct {
-    uint32_t total_created;
-    uint32_t total_deleted;
-    uint32_t create_failures;
-    uint32_t delete_failures;
-    uint32_t pool_allocations;
-    uint32_t dynamic_allocations;
-    uint32_t peak_pool_usage;
-    uint32_t stack_overflow_detections;
-} task_creation_stats_t;
+/* Task creation statistics - defined in header */
 
 /*==============================================================================
  * STATIC VARIABLES
@@ -93,7 +102,7 @@ static void free_stack_to_pool(void *stack);
 static dsrtos_error_t validate_task_parameters(const dsrtos_task_params_t *params);
 static dsrtos_error_t setup_task_context(dsrtos_tcb_t *tcb, const dsrtos_task_params_t *params);
 static void task_exit_handler(void);
-static dsrtos_error_t check_stack_integrity(dsrtos_tcb_t *tcb);
+/* static dsrtos_error_t check_stack_integrity(dsrtos_tcb_t *tcb); */
 static void update_creation_statistics(bool success, bool from_pool);
 
 /*==============================================================================
@@ -142,7 +151,8 @@ dsrtos_tcb_t* dsrtos_task_create_extended(const dsrtos_task_create_extended_t *p
     /* Convert to standard parameters */
     dsrtos_task_params_t std_params;
     (void)memset(&std_params, 0, sizeof(std_params));
-    std_params.name = params->base.name;
+    (void)strncpy(std_params.name, params->base.name, sizeof(std_params.name) - 1);
+    std_params.name[sizeof(std_params.name) - 1] = '\0';
     std_params.entry_point = params->base.entry_point;
     std_params.param = params->base.param;
     std_params.stack_size = params->base.stack_size;
@@ -246,7 +256,8 @@ dsrtos_tcb_t* dsrtos_task_clone(const dsrtos_tcb_t *source_task, const char *new
     
     /* Copy parameters from source */
     (void)memset(&params, 0, sizeof(params));
-    params.name = new_name ? new_name : "Cloned_Task";
+    (void)strncpy(params.name, new_name ? new_name : "Cloned_Task", sizeof(params.name) - 1);
+    params.name[sizeof(params.name) - 1] = '\0';
     params.entry_point = source_task->entry_point;
     params.param = source_task->task_param;
     params.stack_size = source_task->stack_size;
@@ -358,7 +369,7 @@ dsrtos_error_t dsrtos_task_restart(dsrtos_tcb_t *task)
  * @param stats Buffer to store statistics
  * @return Error code
  */
-dsrtos_error_t dsrtos_task_get_creation_stats(task_creation_stats_t *stats)
+/* dsrtos_error_t dsrtos_task_get_creation_stats(task_creation_stats_t *stats)
 {
     if (stats == NULL) {
         return DSRTOS_ERROR_INVALID_PARAM;
@@ -369,7 +380,7 @@ dsrtos_error_t dsrtos_task_get_creation_stats(task_creation_stats_t *stats)
     dsrtos_critical_exit();
     
     return DSRTOS_SUCCESS;
-}
+} */
 
 /*==============================================================================
  * STATIC FUNCTIONS
@@ -543,7 +554,7 @@ static void task_exit_handler(void)
     if (current != NULL) {
         /* Call custom exit handler if set */
         if (current->exit_handler != NULL) {
-            current->exit_handler(current);
+            ((dsrtos_task_exit_handler_t)current->exit_handler)(current);
         }
         
         /* Delete self */
@@ -561,25 +572,25 @@ static void task_exit_handler(void)
  * @param tcb Task control block
  * @return Error code
  */
-static dsrtos_error_t check_stack_integrity(dsrtos_tcb_t *tcb)
+/* static dsrtos_error_t check_stack_integrity(dsrtos_tcb_t *tcb)
 {
     uint32_t *stack_base = (uint32_t *)tcb->stack_base;
     uint32_t *stack_top = (uint32_t *)((uint8_t *)tcb->stack_base + tcb->stack_size);
     
-    /* Check bottom canary */
+    // Check bottom canary
     if (stack_base[0] != DSRTOS_STACK_CANARY_VALUE) {
         g_creation_stats.stack_overflow_detections++;
         return DSRTOS_ERROR_STACK_OVERFLOW;
     }
     
-    /* Check top canary */
+    // Check top canary
     if (stack_top[-1] != DSRTOS_STACK_CANARY_VALUE) {
         g_creation_stats.stack_overflow_detections++;
         return DSRTOS_ERROR_STACK_OVERFLOW;
     }
     
     return DSRTOS_SUCCESS;
-}
+} */
 
 /**
  * @brief Update creation statistics

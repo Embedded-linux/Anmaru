@@ -247,6 +247,11 @@ extern "C" {
  */
 #ifndef DSRTOS_SCHEDULER_MAGIC
 #define DSRTOS_SCHEDULER_MAGIC                 0x53434844U  /* "SCHD" */
+#define DSRTOS_NOT_FOUND                       (-16)        /* Task/object not found */
+#define DSRTOS_INVALID_PARAM                   (-1)         /* Invalid parameter */
+#define SCHEDULER_MAGIC                        0x53434845U  /* "SCHE" */
+#define DSRTOS_LIMIT_EXCEEDED                  (-17)        /* Limit exceeded */
+#define DSRTOS_NO_MEMORY                       (-18)        /* No memory available */
 #endif
 
 /**

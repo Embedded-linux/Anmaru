@@ -1,0 +1,10 @@
+src/common/dsrtos_memory_stub.c:194:16:dsrtos_memory_init	16	static
+src/common/dsrtos_memory_stub.c:246:16:dsrtos_memory_allocate	32	static
+src/common/dsrtos_memory_stub.c:309:16:dsrtos_memory_free	32	static
+src/common/dsrtos_memory_stub.c:363:16:dsrtos_memory_get_stats	32	static
+src/common/dsrtos_memory_stub.c:400:17:calculate_checksum	32	static
+src/common/dsrtos_memory_stub.c:422:23:validate_block_integrity	24	static
+src/common/dsrtos_memory_stub.c:452:22:find_free_slot	16	static
+src/common/dsrtos_memory_stub.c:473:22:find_block_by_address	24	static
+src/common/dsrtos_memory_stub.c:493:13:update_control_checksum	8	static
+src/common/dsrtos_memory_stub.c:503:13:validate_control_integrity	16	static

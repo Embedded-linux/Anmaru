@@ -1,0 +1,6 @@
+include/common/core_cm4.h:56:20:__disable_irq	4	static
+src/phase2/dsrtos_assert.c:49:16:dsrtos_assert_init	16	static
+src/phase2/dsrtos_assert.c:65:25:dsrtos_assert_set_handler	24	static
+src/phase2/dsrtos_assert.c:87:6:dsrtos_assert_failed	48	static
+src/phase2/dsrtos_assert.c:116:16:dsrtos_assert_get_stats	24	static
+src/phase2/dsrtos_assert.c:137:13:assert_default_handler	48	static

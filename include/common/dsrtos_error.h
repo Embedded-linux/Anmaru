@@ -394,7 +394,7 @@ bool dsrtos_error_requires_shutdown(dsrtos_error_t error);
  * @return DSRTOS_SUCCESS on success, error code on failure
  * @note Application-specific error handling hook
  */
-dsrtos_error_t dsrtos_error_register_handler(dsrtos_error_handler_t handler, void* context);
+/* dsrtos_error_t dsrtos_error_register_handler(dsrtos_error_handler_t handler, void* context); */
 
 /**
  * @brief Log error occurrence for audit trail

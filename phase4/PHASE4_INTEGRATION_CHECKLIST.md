@@ -102,3 +102,9 @@ make clean && make debug
 **Standards**: MISRA-C:2012, DO-178C DAL-B, IEC 62304 Class B, ISO 26262 ASIL D
 **Goal**: Zero warnings, production-ready kernel
 
+
+
+
+
+
+

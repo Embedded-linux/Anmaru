@@ -18,7 +18,7 @@ extern "C" {
 #include <stdint.h>
 #include <stdbool.h>
 #include "dsrtos_types.h"
-#include "dsrtos_task.h"
+#include "dsrtos_task_manager.h"
 #include "dsrtos_task_scheduler_interface.h"
 
 /* Queue iterator for traversal */

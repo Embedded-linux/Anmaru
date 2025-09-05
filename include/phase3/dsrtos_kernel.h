@@ -17,6 +17,7 @@ extern "C" {
 
 #include <stdint.h>
 #include "dsrtos_types.h"
+#include "dsrtos_task_manager.h"
 
 /*==============================================================================
  * KERNEL INTERFACE FUNCTIONS
@@ -31,7 +32,7 @@ void* dsrtos_malloc(size_t size);
 void dsrtos_free(void *ptr);
 
 /* Scheduler interface stub */
-void dsrtos_scheduler_yield(void);
+dsrtos_error_t dsrtos_scheduler_yield(void);
 
 /* Task helper */
 dsrtos_tcb_t* dsrtos_task_get_by_index(uint32_t index);

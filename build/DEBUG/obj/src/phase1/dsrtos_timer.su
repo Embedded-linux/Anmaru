@@ -1,0 +1,11 @@
+src/phase1/dsrtos_timer.c:168:24:configure_systick	32	static
+src/phase1/dsrtos_timer.c:252:13:systick_interrupt_handler	32	static
+src/phase1/dsrtos_timer.c:278:24:configure_hires_timer	4	static
+src/phase1/dsrtos_timer.c:318:13:process_timer_callbacks	48	static
+src/phase1/dsrtos_timer.c:376:17:dsrtos_timer_init	24	static
+src/phase1/dsrtos_timer.c:446:10:dsrtos_timer_get_ticks	24	static
+src/phase1/dsrtos_timer.c:464:10:dsrtos_timer_get_milliseconds	8	static
+src/phase1/dsrtos_timer.c:505:10:dsrtos_timer_get_microseconds	40	static
+src/phase1/dsrtos_timer.c:519:17:dsrtos_timer_delay_us	56	static
+src/phase1/dsrtos_timer.c:549:17:dsrtos_timer_delay_ms	16	static
+src/phase1/dsrtos_timer.c:623:17:dsrtos_timer_get_stats	32	static

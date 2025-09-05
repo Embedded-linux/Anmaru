@@ -8,10 +8,10 @@
  * MISRA-C:2012 Compliant
  */
 
-#include "dsrtos_preemption.h"
-#include "dsrtos_critical.h"
-#include "dsrtos_kernel.h"
 #include "dsrtos_task_manager.h"
+#include "dsrtos_kernel.h"
+#include "dsrtos_critical.h"
+#include "dsrtos_preemption.h"
 #include "dsrtos_assert.h"
 #include "stm32f4xx.h"
 
@@ -61,7 +61,7 @@ dsrtos_error_t dsrtos_preemption_init(void)
 void dsrtos_preemption_disable(void)
 {
     uint32_t primask;
-    uint32_t current_time;
+    /* uint32_t current_time; */ /* Unused for now */
     
     /* Save and disable interrupts */
     primask = __get_PRIMASK();

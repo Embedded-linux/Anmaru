@@ -1,0 +1,678 @@
+# ============================================================================
+# DSRTOS - Dynamic Scheduler Real-Time Operating System
+# Complete Integrated Makefile for Phases 1-5
+# 
+# Copyright (c) 2024 DSRTOS
+# Certification: DO-178C DAL-B, IEC 62304 Class B, ISO 26262 ASIL D
+# ============================================================================
+
+# Shell configuration
+SHELL := /bin/bash
+
+#==============================================================================
+# Build Configuration
+#==============================================================================
+# Target MCU
+TARGET := STM32F407VG
+MCU := cortex-m4
+FPU := fpv4-sp-d16
+FLOAT_ABI := hard
+
+# Toolchain
+TOOLCHAIN_PREFIX := arm-none-eabi-
+CC := $(TOOLCHAIN_PREFIX)gcc
+CXX := $(TOOLCHAIN_PREFIX)g++
+AS := $(TOOLCHAIN_PREFIX)as
+AR := $(TOOLCHAIN_PREFIX)ar
+LD := $(TOOLCHAIN_PREFIX)ld
+OBJCOPY := $(TOOLCHAIN_PREFIX)objcopy
+OBJDUMP := $(TOOLCHAIN_PREFIX)objdump
+SIZE := $(TOOLCHAIN_PREFIX)size
+GDB := $(TOOLCHAIN_PREFIX)gdb
+NM := $(TOOLCHAIN_PREFIX)nm
+STRIP := $(TOOLCHAIN_PREFIX)strip
+
+# Host tools
+MKDIR := mkdir -p
+RM := rm -rf
+CP := cp -f
+MV := mv -f
+ECHO := @echo
+PYTHON := python3
+DOXYGEN := doxygen
+LCOV := lcov
+GENHTML := genhtml
+CTAGS := ctags
+CSCOPE := cscope
+CLOC := cloc
+CCCC := cccc
+
+# Build directories
+BUILD_DIR := build
+OBJ_DIR := $(BUILD_DIR)/obj
+LIB_DIR := $(BUILD_DIR)/lib
+BIN_DIR := $(BUILD_DIR)/bin
+DOC_DIR := $(BUILD_DIR)/doc
+TEST_DIR := $(BUILD_DIR)/test
+COVERAGE_DIR := $(BUILD_DIR)/coverage
+REPORT_DIR := $(BUILD_DIR)/reports
+DEP_DIR := $(BUILD_DIR)/deps
+
+#==============================================================================
+# Source Directories
+#==============================================================================
+# Root directories
+SRC_ROOT := src
+INC_ROOT := include
+TEST_ROOT := tests
+TOOLS_ROOT := tools
+DOCS_ROOT := docs
+
+# Phase 1: Boot & Board Bring-up
+PHASE1_SRC := $(SRC_ROOT)/arch/arm/cortex-m4
+PHASE1_INC := $(INC_ROOT)/arch/arm/cortex-m4
+
+# Phase 2: Kernel Core
+PHASE2_SRC := $(SRC_ROOT)/kernel/core
+PHASE2_INC := $(INC_ROOT)/kernel/core
+
+# Phase 3: Task Management
+PHASE3_SRC := $(SRC_ROOT)/kernel/task
+PHASE3_INC := $(INC_ROOT)/kernel/task
+
+# Phase 4: Task-Scheduler Interface
+PHASE4_SRC := $(SRC_ROOT)/kernel/interface
+PHASE4_INC := $(INC_ROOT)/kernel/interface
+
+# Phase 5: Pluggable Scheduler Core
+PHASE5_SRC := $(SRC_ROOT)/kernel/scheduler
+PHASE5_INC := $(INC_ROOT)/kernel/scheduler
+
+# Common includes
+COMMON_INC := $(INC_ROOT)
+
+# Test directories
+PHASE1_TEST := $(TEST_ROOT)/phase1
+PHASE2_TEST := $(TEST_ROOT)/phase2
+PHASE3_TEST := $(TEST_ROOT)/phase3
+PHASE4_TEST := $(TEST_ROOT)/phase4
+PHASE5_TEST := $(TEST_ROOT)/phase5
+COMMON_TEST := $(TEST_ROOT)/common
+
+#==============================================================================
+# Source Files
+#==============================================================================
+# Phase 1 C sources
+PHASE1_C_SOURCES := \
+    $(PHASE1_SRC)/boot.c \
+    $(PHASE1_SRC)/system_config.c \
+    $(PHASE1_SRC)/clock_config.c \
+    $(PHASE1_SRC)/interrupt_controller.c \
+    $(PHASE1_SRC)/memory_init.c \
+    $(PHASE1_SRC)/uart_debug.c \
+    $(PHASE1_SRC)/diagnostic.c \
+    $(PHASE1_SRC)/security_init.c \
+    $(PHASE1_SRC)/watchdog.c \
+    $(PHASE1_SRC)/fault_handler.c
+
+# Phase 1 Assembly sources
+PHASE1_ASM_SOURCES := \
+    $(PHASE1_SRC)/startup_stm32f4.s \
+    $(PHASE1_SRC)/vector_table.s \
+    $(PHASE1_SRC)/low_level_init.s
+
+# Phase 2 sources
+PHASE2_SOURCES := \
+    $(PHASE2_SRC)/dsrtos_kernel.c \
+    $(PHASE2_SRC)/dsrtos_critical.c \
+    $(PHASE2_SRC)/dsrtos_syscall.c \
+    $(PHASE2_SRC)/dsrtos_error.c \
+    $(PHASE2_SRC)/dsrtos_hooks.c \
+    $(PHASE2_SRC)/dsrtos_stats.c \
+    $(PHASE2_SRC)/dsrtos_trace.c \
+    $(PHASE2_SRC)/dsrtos_assert.c \
+    $(PHASE2_SRC)/dsrtos_panic.c \
+    $(PHASE2_SRC)/dsrtos_version.c \
+    $(PHASE2_SRC)/dsrtos_service.c
+
+# Phase 3 sources
+PHASE3_SOURCES := \
+    $(PHASE3_SRC)/dsrtos_task.c \
+    $(PHASE3_SRC)/dsrtos_task_create.c \
+    $(PHASE3_SRC)/dsrtos_task_control.c \
+    $(PHASE3_SRC)/dsrtos_task_queue.c \
+    $(PHASE3_SRC)/dsrtos_stack.c \
+    $(PHASE3_SRC)/dsrtos_tcb.c \
+    $(PHASE3_SRC)/dsrtos_task_state.c \
+    $(PHASE3_SRC)/dsrtos_task_list.c \
+    $(PHASE3_SRC)/dsrtos_task_priority.c
+
+# Phase 4 sources
+PHASE4_SOURCES := \
+    $(PHASE4_SRC)/dsrtos_scheduler_interface.c \
+    $(PHASE4_SRC)/dsrtos_ready_queue.c \
+    $(PHASE4_SRC)/dsrtos_priority_bitmap.c \
+    $(PHASE4_SRC)/dsrtos_context_switch.c \
+    $(PHASE4_SRC)/dsrtos_preemption.c \
+    $(PHASE4_SRC)/dsrtos_idle.c \
+    $(PHASE4_SRC)/dsrtos_tick.c \
+    $(PHASE4_SRC)/dsrtos_yield.c \
+    $(PHASE4_SRC)/dsrtos_scheduling.c
+
+# Phase 5 sources
+PHASE5_SOURCES := \
+    $(PHASE5_SRC)/dsrtos_scheduler_core.c \
+    $(PHASE5_SRC)/dsrtos_scheduler_manager.c \
+    $(PHASE5_SRC)/dsrtos_scheduler_plugin.c \
+    $(PHASE5_SRC)/dsrtos_scheduler_adapt.c \
+    $(PHASE5_SRC)/dsrtos_scheduler_monitor.c \
+    $(PHASE5_SRC)/dsrtos_scheduler_switch.c \
+    $(PHASE5_SRC)/dsrtos_scheduler_metrics.c \
+    $(PHASE5_SRC)/dsrtos_scheduler_decision.c \
+    $(PHASE5_SRC)/dsrtos_scheduler_validation.c
+
+# Test sources
+PHASE1_TEST_SOURCES := \
+    $(PHASE1_TEST)/test_boot.c \
+    $(PHASE1_TEST)/test_clock.c \
+    $(PHASE1_TEST)/test_memory.c \
+    $(PHASE1_TEST)/test_interrupt.c \
+    $(PHASE1_TEST)/test_uart.c
+
+PHASE2_TEST_SOURCES := \
+    $(PHASE2_TEST)/test_kernel.c \
+    $(PHASE2_TEST)/test_critical.c \
+    $(PHASE2_TEST)/test_syscall.c \
+    $(PHASE2_TEST)/test_hooks.c \
+    $(PHASE2_TEST)/test_error.c
+
+PHASE3_TEST_SOURCES := \
+    $(PHASE3_TEST)/test_task.c \
+    $(PHASE3_TEST)/test_tcb.c \
+    $(PHASE3_TEST)/test_stack.c \
+    $(PHASE3_TEST)/test_queue.c \
+    $(PHASE3_TEST)/test_state.c
+
+PHASE4_TEST_SOURCES := \
+    $(PHASE4_TEST)/test_interface.c \
+    $(PHASE4_TEST)/test_ready_queue.c \
+    $(PHASE4_TEST)/test_context_switch.c \
+    $(PHASE4_TEST)/test_preemption.c \
+    $(PHASE4_TEST)/test_bitmap.c
+
+PHASE5_TEST_SOURCES := \
+    $(PHASE5_TEST)/test_scheduler_core.c \
+    $(PHASE5_TEST)/test_scheduler_manager.c \
+    $(PHASE5_TEST)/test_scheduler_plugin.c \
+    $(PHASE5_TEST)/test_scheduler_adapt.c \
+    $(PHASE5_TEST)/test_scheduler_switch.c \
+    $(PHASE5_TEST)/test_scheduler_performance.c
+
+# Common test framework
+TEST_FRAMEWORK_SOURCES := \
+    $(COMMON_TEST)/test_framework.c \
+    $(COMMON_TEST)/test_runner.c \
+    $(COMMON_TEST)/test_mock.c
+
+# All source files
+ALL_C_SOURCES := $(PHASE1_C_SOURCES) $(PHASE2_SOURCES) $(PHASE3_SOURCES) \
+                 $(PHASE4_SOURCES) $(PHASE5_SOURCES)
+ALL_ASM_SOURCES := $(PHASE1_ASM_SOURCES)
+ALL_TEST_SOURCES := $(PHASE1_TEST_SOURCES) $(PHASE2_TEST_SOURCES) \
+                    $(PHASE3_TEST_SOURCES) $(PHASE4_TEST_SOURCES) \
+                    $(PHASE5_TEST_SOURCES) $(TEST_FRAMEWORK_SOURCES)
+
+# Object files
+PHASE1_C_OBJS := $(addprefix $(OBJ_DIR)/,$(PHASE1_C_SOURCES:.c=.o))
+PHASE1_ASM_OBJS := $(addprefix $(OBJ_DIR)/,$(PHASE1_ASM_SOURCES:.s=.o))
+PHASE2_OBJS := $(addprefix $(OBJ_DIR)/,$(PHASE2_SOURCES:.c=.o))
+PHASE3_OBJS := $(addprefix $(OBJ_DIR)/,$(PHASE3_SOURCES:.c=.o))
+PHASE4_OBJS := $(addprefix $(OBJ_DIR)/,$(PHASE4_SOURCES:.c=.o))
+PHASE5_OBJS := $(addprefix $(OBJ_DIR)/,$(PHASE5_SOURCES:.c=.o))
+
+ALL_OBJS := $(PHASE1_C_OBJS) $(PHASE1_ASM_OBJS) $(PHASE2_OBJS) \
+            $(PHASE3_OBJS) $(PHASE4_OBJS) $(PHASE5_OBJS)
+
+TEST_OBJS := $(addprefix $(OBJ_DIR)/,$(ALL_TEST_SOURCES:.c=.o))
+
+# Dependency files
+DEPS := $(ALL_OBJS:.o=.d)
+TEST_DEPS := $(TEST_OBJS:.o=.d)
+
+#==============================================================================
+# Compiler Flags
+#==============================================================================
+# MCU flags
+MCU_FLAGS := \
+    -mcpu=$(MCU) \
+    -mthumb \
+    -mfpu=$(FPU) \
+    -mfloat-abi=$(FLOAT_ABI)
+
+# Certification flags
+CERT_FLAGS := \
+    -DMISRA_C_2012 \
+    -DDO178C_LEVEL_B \
+    -DIEC62304_CLASS_B \
+    -DISO26262_ASIL_D \
+    -DCERTIFICATION_BUILD
+
+# MISRA-C:2012 compliance flags
+MISRA_FLAGS := \
+    -Wall \
+    -Wextra \
+    -Werror \
+    -Wstrict-prototypes \
+    -Wmissing-prototypes \
+    -Wmissing-declarations \
+    -Wold-style-definition \
+    -Wpointer-arith \
+    -Wcast-align \
+    -Wcast-qual \
+    -Wconversion \
+    -Wsign-conversion \
+    -Wfloat-equal \
+    -Wredundant-decls \
+    -Wunreachable-code \
+    -Wshadow \
+    -Wlogical-op \
+    -Wno-aggressive-loop-optimizations \
+    -Wdouble-promotion \
+    -Wundef \
+    -Wswitch-default \
+    -Wconversion \
+    -Wformat=2
+
+# Safety-critical flags
+SAFETY_FLAGS := \
+    -fno-common \
+    -ffunction-sections \
+    -fdata-sections \
+    -fno-exceptions \
+    -fstack-protector-strong \
+    -fno-strict-aliasing \
+    -fstack-usage \
+    -D_FORTIFY_SOURCE=2
+
+# Debug/Release configuration
+DEBUG ?= 1
+ifeq ($(DEBUG),1)
+    OPT_FLAGS := -O0 -g3 -ggdb -DDEBUG
+    BUILD_TYPE := debug
+else
+    OPT_FLAGS := -O2 -g -DNDEBUG
+    BUILD_TYPE := release
+endif
+
+# Include paths
+INCLUDES := \
+    -I$(COMMON_INC) \
+    -I$(PHASE1_INC) \
+    -I$(PHASE2_INC) \
+    -I$(PHASE3_INC) \
+    -I$(PHASE4_INC) \
+    -I$(PHASE5_INC) \
+    -I$(COMMON_TEST)
+
+# C compiler flags
+CFLAGS := \
+    $(MCU_FLAGS) \
+    $(OPT_FLAGS) \
+    $(CERT_FLAGS) \
+    $(MISRA_FLAGS) \
+    $(SAFETY_FLAGS) \
+    $(INCLUDES) \
+    -std=c99 \
+    -MMD -MP \
+    -DSTM32F407xx \
+    -DUSE_HAL_DRIVER \
+    -DDSRTOS_VERSION=\"1.0.0\"
+
+# Assembler flags
+ASFLAGS := \
+    $(MCU_FLAGS) \
+    -g3 \
+    -x assembler-with-cpp \
+    -MMD -MP
+
+# Linker script
+LDSCRIPT := $(PHASE1_SRC)/STM32F407VGTx_FLASH.ld
+
+# Linker flags
+LDFLAGS := \
+    $(MCU_FLAGS) \
+    -specs=nano.specs \
+    -T$(LDSCRIPT) \
+    -Wl,--gc-sections \
+    -Wl,-Map=$(BUILD_DIR)/dsrtos.map,--cref \
+    -Wl,--print-memory-usage \
+    -Wl,--no-wchar-size-warning \
+    -Wl,--start-group \
+    -lc -lm -lnosys \
+    -Wl,--end-group
+
+# Coverage flags
+COVERAGE_FLAGS := --coverage -fprofile-arcs -ftest-coverage
+
+# PC-Lint flags for MISRA checking
+PCLINT_FLAGS := \
+    -i$(COMMON_INC) \
+    -i$(PHASE1_INC) \
+    -i$(PHASE2_INC) \
+    -i$(PHASE3_INC) \
+    -i$(PHASE4_INC) \
+    -i$(PHASE5_INC) \
+    au-misra3.lnt
+
+#==============================================================================
+# Build Rules
+#==============================================================================
+# Default target
+.DEFAULT_GOAL := all
+
+# Phony targets
+.PHONY: all clean dirs info help
+.PHONY: phase1 phase2 phase3 phase4 phase5
+.PHONY: test test_phase1 test_phase2 test_phase3 test_phase4 test_phase5
+.PHONY: coverage analysis misra cert metrics cppcheck
+.PHONY: docs debug flash flash-stlink erase
+.PHONY: size tags format format-check
+
+# Main build target
+all: info dirs dsrtos.elf dsrtos.bin dsrtos.hex size
+	$(ECHO) "========================================="
+	$(ECHO) "Build Complete: $(BUILD_TYPE) build"
+	$(ECHO) "========================================="
+
+# Create build directories
+dirs:
+	@$(MKDIR) $(BUILD_DIR)
+	@$(MKDIR) $(OBJ_DIR)
+	@$(MKDIR) $(LIB_DIR)
+	@$(MKDIR) $(BIN_DIR)
+	@$(MKDIR) $(DOC_DIR)
+	@$(MKDIR) $(TEST_DIR)
+	@$(MKDIR) $(COVERAGE_DIR)
+	@$(MKDIR) $(REPORT_DIR)
+	@$(MKDIR) $(DEP_DIR)
+	@$(MKDIR) $(OBJ_DIR)/$(PHASE1_SRC)
+	@$(MKDIR) $(OBJ_DIR)/$(PHASE2_SRC)
+	@$(MKDIR) $(OBJ_DIR)/$(PHASE3_SRC)
+	@$(MKDIR) $(OBJ_DIR)/$(PHASE4_SRC)
+	@$(MKDIR) $(OBJ_DIR)/$(PHASE5_SRC)
+	@$(MKDIR) $(OBJ_DIR)/$(PHASE1_TEST)
+	@$(MKDIR) $(OBJ_DIR)/$(PHASE2_TEST)
+	@$(MKDIR) $(OBJ_DIR)/$(PHASE3_TEST)
+	@$(MKDIR) $(OBJ_DIR)/$(PHASE4_TEST)
+	@$(MKDIR) $(OBJ_DIR)/$(PHASE5_TEST)
+	@$(MKDIR) $(OBJ_DIR)/$(COMMON_TEST)
+
+#==============================================================================
+# Phase Build Targets
+#==============================================================================
+phase1: dirs $(PHASE1_C_OBJS) $(PHASE1_ASM_OBJS)
+	$(ECHO) "Building Phase 1: Boot & Board Bring-up"
+	@$(AR) rcs $(LIB_DIR)/libphase1.a $(PHASE1_C_OBJS) $(PHASE1_ASM_OBJS)
+	$(ECHO) "Phase 1 library: $(LIB_DIR)/libphase1.a"
+
+phase2: dirs phase1 $(PHASE2_OBJS)
+	$(ECHO) "Building Phase 2: Kernel Core"
+	@$(AR) rcs $(LIB_DIR)/libphase2.a $(PHASE2_OBJS)
+	$(ECHO) "Phase 2 library: $(LIB_DIR)/libphase2.a"
+
+phase3: dirs phase2 $(PHASE3_OBJS)
+	$(ECHO) "Building Phase 3: Task Management"
+	@$(AR) rcs $(LIB_DIR)/libphase3.a $(PHASE3_OBJS)
+	$(ECHO) "Phase 3 library: $(LIB_DIR)/libphase3.a"
+
+phase4: dirs phase3 $(PHASE4_OBJS)
+	$(ECHO) "Building Phase 4: Task-Scheduler Interface"
+	@$(AR) rcs $(LIB_DIR)/libphase4.a $(PHASE4_OBJS)
+	$(ECHO) "Phase 4 library: $(LIB_DIR)/libphase4.a"
+
+phase5: dirs phase4 $(PHASE5_OBJS)
+	$(ECHO) "Building Phase 5: Pluggable Scheduler Core"
+	@$(AR) rcs $(LIB_DIR)/libphase5.a $(PHASE5_OBJS)
+	$(ECHO) "Phase 5 library: $(LIB_DIR)/libphase5.a"
+
+# Combined library
+libdsrtos.a: phase5
+	$(ECHO) "Creating integrated DSRTOS library..."
+	@$(AR) rcs $(LIB_DIR)/libdsrtos.a $(ALL_OBJS)
+	$(ECHO) "Library: $(LIB_DIR)/libdsrtos.a"
+
+#==============================================================================
+# Compilation Rules
+#==============================================================================
+$(OBJ_DIR)/%.o: %.c
+	$(ECHO) "  CC      $<"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: %.s
+	$(ECHO) "  AS      $<"
+	@$(AS) $(ASFLAGS) -c $< -o $@
+
+-include $(DEPS)
+-include $(TEST_DEPS)
+
+#==============================================================================
+# Linking and Output Generation
+#==============================================================================
+dsrtos.elf: $(ALL_OBJS)
+	$(ECHO) "Linking $@..."
+	@$(CC) $(ALL_OBJS) $(LDFLAGS) -o $(BIN_DIR)/$@
+	$(ECHO) "ELF file: $(BIN_DIR)/$@"
+
+dsrtos.bin: dsrtos.elf
+	$(ECHO) "Generating binary..."
+	@$(OBJCOPY) -O binary $(BIN_DIR)/dsrtos.elf $(BIN_DIR)/$@
+	$(ECHO) "Binary: $(BIN_DIR)/$@ (size: `stat -c%s $(BIN_DIR)/$@` bytes)"
+
+dsrtos.hex: dsrtos.elf
+	$(ECHO) "Generating hex file..."
+	@$(OBJCOPY) -O ihex $(BIN_DIR)/dsrtos.elf $(BIN_DIR)/$@
+	$(ECHO) "Hex file: $(BIN_DIR)/$@"
+
+dsrtos.list: dsrtos.elf
+	$(ECHO) "Generating listing..."
+	@$(OBJDUMP) -h -S $(BIN_DIR)/dsrtos.elf > $(BUILD_DIR)/$@
+
+#==============================================================================
+# Testing
+#==============================================================================
+test: test_phase1 test_phase2 test_phase3 test_phase4 test_phase5
+	$(ECHO) "========================================="
+	$(ECHO) "All Tests Passed"
+	$(ECHO) "========================================="
+
+test_phase1: phase1 $(addprefix $(OBJ_DIR)/,$(PHASE1_TEST_SOURCES:.c=.o))
+	$(ECHO) "Testing Phase 1..."
+	@$(CC) $(CFLAGS) -DUNIT_TEST $(addprefix $(OBJ_DIR)/,$(PHASE1_TEST_SOURCES:.c=.o)) \
+		$(LIB_DIR)/libphase1.a -o $(TEST_DIR)/test_phase1
+	@$(TEST_DIR)/test_phase1
+
+test_phase2: phase2 $(addprefix $(OBJ_DIR)/,$(PHASE2_TEST_SOURCES:.c=.o))
+	$(ECHO) "Testing Phase 2..."
+	@$(CC) $(CFLAGS) -DUNIT_TEST $(addprefix $(OBJ_DIR)/,$(PHASE2_TEST_SOURCES:.c=.o)) \
+		$(LIB_DIR)/libphase2.a $(LIB_DIR)/libphase1.a -o $(TEST_DIR)/test_phase2
+	@$(TEST_DIR)/test_phase2
+
+test_phase3: phase3 $(addprefix $(OBJ_DIR)/,$(PHASE3_TEST_SOURCES:.c=.o))
+	$(ECHO) "Testing Phase 3..."
+	@$(CC) $(CFLAGS) -DUNIT_TEST $(addprefix $(OBJ_DIR)/,$(PHASE3_TEST_SOURCES:.c=.o)) \
+		$(LIB_DIR)/libphase3.a $(LIB_DIR)/libphase2.a $(LIB_DIR)/libphase1.a \
+		-o $(TEST_DIR)/test_phase3
+	@$(TEST_DIR)/test_phase3
+
+test_phase4: phase4 $(addprefix $(OBJ_DIR)/,$(PHASE4_TEST_SOURCES:.c=.o))
+	$(ECHO) "Testing Phase 4..."
+	@$(CC) $(CFLAGS) -DUNIT_TEST $(addprefix $(OBJ_DIR)/,$(PHASE4_TEST_SOURCES:.c=.o)) \
+		$(LIB_DIR)/libphase4.a $(LIB_DIR)/libphase3.a $(LIB_DIR)/libphase2.a \
+		$(LIB_DIR)/libphase1.a -o $(TEST_DIR)/test_phase4
+	@$(TEST_DIR)/test_phase4
+
+test_phase5: phase5 $(addprefix $(OBJ_DIR)/,$(PHASE5_TEST_SOURCES:.c=.o))
+	$(ECHO) "Testing Phase 5..."
+	@$(CC) $(CFLAGS) -DUNIT_TEST $(addprefix $(OBJ_DIR)/,$(PHASE5_TEST_SOURCES:.c=.o)) \
+		$(LIB_DIR)/libphase5.a $(LIB_DIR)/libphase4.a $(LIB_DIR)/libphase3.a \
+		$(LIB_DIR)/libphase2.a $(LIB_DIR)/libphase1.a -o $(TEST_DIR)/test_phase5
+	@$(TEST_DIR)/test_phase5
+
+coverage: clean
+	$(ECHO) "Running coverage analysis..."
+	@$(MAKE) CFLAGS="$(CFLAGS) $(COVERAGE_FLAGS)" test
+	@$(LCOV) --capture --directory $(OBJ_DIR) --output-file $(COVERAGE_DIR)/coverage.info
+	@$(LCOV) --remove $(COVERAGE_DIR)/coverage.info '/usr/*' --output-file $(COVERAGE_DIR)/coverage.info
+	@$(GENHTML) $(COVERAGE_DIR)/coverage.info --output-directory $(COVERAGE_DIR)/html
+	$(ECHO) "Coverage report: $(COVERAGE_DIR)/html/index.html"
+
+#==============================================================================
+# Static Analysis
+#==============================================================================
+analysis: misra cert metrics cppcheck
+	$(ECHO) "Analysis complete"
+
+misra:
+	$(ECHO) "Running MISRA-C:2012 analysis..."
+	@pc-lint-plus $(PCLINT_FLAGS) $(ALL_C_SOURCES) > $(REPORT_DIR)/misra.log 2>&1 || true
+	$(ECHO) "MISRA report: $(REPORT_DIR)/misra.log"
+
+cert:
+	$(ECHO) "Checking certification compliance..."
+	@$(PYTHON) $(TOOLS_ROOT)/cert_check.py --standard=ALL $(ALL_C_SOURCES)
+
+metrics:
+	$(ECHO) "Generating metrics..."
+	@$(CLOC) --by-file --xml --out=$(REPORT_DIR)/cloc.xml $(ALL_C_SOURCES)
+	@$(CCCC) $(ALL_C_SOURCES) --outdir=$(REPORT_DIR)/metrics
+
+cppcheck:
+	$(ECHO) "Running cppcheck..."
+	@cppcheck --enable=all --std=c99 --xml --xml-version=2 \
+		$(INCLUDES) $(ALL_C_SOURCES) 2> $(REPORT_DIR)/cppcheck.xml
+
+#==============================================================================
+# Documentation
+#==============================================================================
+docs:
+	$(ECHO) "Generating documentation..."
+	@$(DOXYGEN) $(DOCS_ROOT)/Doxyfile
+	$(ECHO) "Documentation: $(DOC_DIR)/html/index.html"
+
+#==============================================================================
+# Programming and Debugging
+#==============================================================================
+flash: dsrtos.bin
+	$(ECHO) "Flashing to target..."
+	openocd -f board/stm32f4discovery.cfg \
+		-c "program $(BIN_DIR)/dsrtos.bin 0x08000000 verify reset exit"
+
+flash-stlink: dsrtos.bin
+	$(ECHO) "Flashing via ST-Link..."
+	st-flash write $(BIN_DIR)/dsrtos.bin 0x08000000
+
+erase:
+	$(ECHO) "Erasing flash..."
+	openocd -f board/stm32f4discovery.cfg \
+		-c "init" -c "reset init" -c "flash erase_sector 0 0 11" -c "exit"
+
+debug: dsrtos.elf
+	$(ECHO) "Starting GDB..."
+	$(GDB) -x $(TOOLS_ROOT)/gdb_init.cfg $(BIN_DIR)/dsrtos.elf
+
+#==============================================================================
+# Utilities
+#==============================================================================
+size: dsrtos.elf
+	$(ECHO) "Size information:"
+	@$(SIZE) -A -d $(BIN_DIR)/dsrtos.elf
+
+tags:
+	$(ECHO) "Generating tags..."
+	@$(CTAGS) -R --c-kinds=+p --fields=+S $(SRC_ROOT) $(INC_ROOT)
+
+format:
+	$(ECHO) "Formatting code..."
+	@find $(SRC_ROOT) $(INC_ROOT) -name "*.c" -o -name "*.h" | \
+		xargs clang-format -i -style=file
+
+format-check:
+	$(ECHO) "Checking format..."
+	@find $(SRC_ROOT) $(INC_ROOT) -name "*.c" -o -name "*.h" | \
+		xargs clang-format --dry-run --Werror -style=file
+
+#==============================================================================
+# Clean
+#==============================================================================
+clean:
+	$(ECHO) "Cleaning..."
+	@$(RM) $(BUILD_DIR)
+
+clean-phase1:
+	@$(RM) $(PHASE1_C_OBJS) $(PHASE1_ASM_OBJS)
+	@$(RM) $(LIB_DIR)/libphase1.a
+
+clean-phase2:
+	@$(RM) $(PHASE2_OBJS)
+	@$(RM) $(LIB_DIR)/libphase2.a
+
+clean-phase3:
+	@$(RM) $(PHASE3_OBJS)
+	@$(RM) $(LIB_DIR)/libphase3.a
+
+clean-phase4:
+	@$(RM) $(PHASE4_OBJS)
+	@$(RM) $(LIB_DIR)/libphase4.a
+
+clean-phase5:
+	@$(RM) $(PHASE5_OBJS)
+	@$(RM) $(LIB_DIR)/libphase5.a
+
+distclean: clean
+	@$(RM) tags .tags cscope.*
+
+#==============================================================================
+# Information
+#==============================================================================
+info:
+	$(ECHO) "========================================="
+	$(ECHO) "DSRTOS Build Configuration"
+	$(ECHO) "========================================="
+	$(ECHO) "Target:         $(TARGET)"
+	$(ECHO) "MCU:            $(MCU)"
+	$(ECHO) "Build Type:     $(BUILD_TYPE)"
+	$(ECHO) "Toolchain:      $(TOOLCHAIN_PREFIX)"
+	$(ECHO) "========================================="
+
+help:
+	$(ECHO) "DSRTOS Build System"
+	$(ECHO) ""
+	$(ECHO) "Build targets:"
+	$(ECHO) "  all         - Build complete system (default)"
+	$(ECHO) "  phase1-5    - Build individual phases"
+	$(ECHO) "  dsrtos.elf  - Build ELF file"
+	$(ECHO) "  dsrtos.bin  - Build binary"
+	$(ECHO) "  dsrtos.hex  - Build hex file"
+	$(ECHO) ""
+	$(ECHO) "Test targets:"
+	$(ECHO) "  test        - Run all tests"
+	$(ECHO) "  test_phaseN - Test phase N"
+	$(ECHO) "  coverage    - Coverage analysis"
+	$(ECHO) ""
+	$(ECHO) "Analysis:"
+	$(ECHO) "  analysis    - Run all analysis"
+	$(ECHO) "  misra       - MISRA-C:2012 check"
+	$(ECHO) "  metrics     - Code metrics"
+	$(ECHO) ""
+	$(ECHO) "Other:"
+	$(ECHO) "  docs        - Generate documentation"
+	$(ECHO) "  flash       - Program target"
+	$(ECHO) "  debug       - Start debugger"
+	$(ECHO) "  clean       - Clean build"
+	$(ECHO) "  help        - This message"
+	$(ECHO) ""
+	$(ECHO) "Options:"
+	$(ECHO) "  DEBUG=0/1   - Debug/Release build"
+	$(ECHO) ""
+
+# End of Makefile

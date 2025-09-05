@@ -1,0 +1,12 @@
+Phase3/dsrtos_task_creation.c:116:16:dsrtos_task_creation_init	8	static
+Phase3/dsrtos_task_creation.c:138:15:dsrtos_task_create_extended	112	static
+Phase3/dsrtos_task_creation.c:246:15:dsrtos_task_clone	104	static
+Phase3/dsrtos_task_creation.c:286:16:dsrtos_task_restart	32	static
+Phase3/dsrtos_task_creation.c:393:22:allocate_tcb_from_pool	24	static
+Phase3/dsrtos_task_creation.c:421:13:free_tcb_to_pool	24	static
+Phase3/dsrtos_task_creation.c:437:14:allocate_stack_from_pool	24	static
+Phase3/dsrtos_task_creation.c:457:13:free_stack_to_pool	24	static
+Phase3/dsrtos_task_creation.c:474:23:validate_task_parameters	16	static
+Phase3/dsrtos_task_creation.c:517:23:setup_task_context	32	static
+Phase3/dsrtos_task_creation.c:550:13:task_exit_handler	16	static
+Phase3/dsrtos_task_creation.c:600:13:update_creation_statistics	16	static
