@@ -1,0 +1,4 @@
+p7/dsrtos_switch_simple.c:32:17:dsrtos_switch_controller_init	16	static
+p7/dsrtos_switch_simple.c:47:17:dsrtos_switch_scheduler	16	static
+p7/dsrtos_switch_simple.c:68:25:dsrtos_switch_get_current_scheduler	16	static
+p7/dsrtos_switch_simple.c:78:29:dsrtos_switch_controller_get_instance	4	static

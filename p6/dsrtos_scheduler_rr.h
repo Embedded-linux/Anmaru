@@ -106,7 +106,7 @@ struct dsrtos_rr_stats {
 /* Round Robin scheduler main structure */
 struct dsrtos_rr_scheduler {
     /* Base scheduler interface */
-    dsrtos_scheduler_plugin_t base;        /* Must be first member */
+    dsrtos_scheduler_base_t base;          /* Must be first member */
     
     /* Configuration */
     uint32_t time_slice_ms;                /* Current time slice */

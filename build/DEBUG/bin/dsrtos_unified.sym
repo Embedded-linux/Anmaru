@@ -1,0 +1,302 @@
+00000200 A _Min_Heap_Size
+00000400 A _Min_Stack_Size
+08000000 00000040 R g_pfnVectors
+08000040 t deregister_tm_clones
+0800005c t register_tm_clones
+08000080 t __do_global_dtors_aux
+080000a8 t frame_dummy
+080000c8 00000134 T memcpy
+080001fc 000000a4 T memset
+080002a0 000000fc T __cvt
+0800039c 0000009c T __exponent
+08000438 00000534 W _printf_float
+0800096c 0000012a T _printf_common
+08000a98 000002b0 T _printf_i
+08000d48 000004a8 W _scanf_float
+080011f0 0000000c T nanf
+080011fc 0000007e T _sniprintf_r
+080011fc 0000007e T _snprintf_r
+0800127c 00000088 T sniprintf
+0800127c 00000088 T snprintf
+08001304 00000038 T _siprintf_r
+08001304 00000038 T _sprintf_r
+0800133c 00000040 T siprintf
+0800133c 00000040 T sprintf
+08001380 000000dc T strlen
+0800145c 0000007e T strncmp
+080014e0 00000f50 T _strtod_l
+08002430 0000000c T _strtod_r
+0800243c 0000001c T strtod_l
+08002458 00000020 T strtod
+08002478 000000b4 T strtof_l
+0800252c 000000b8 T strtof
+080025e4 00000120 t _strtol_l.part.0
+08002704 00000018 T _strtol_r
+0800271c 00000028 T strtol_l
+08002744 00000028 T strtol
+0800276c 0000002c T _write_r
+08002798 00000126 t quorem
+080028c0 00000f7c T _dtoa_r
+0800383c 0000000c T __errno
+08003848 00000004 t __fp_lock
+0800384c 0000000c T _cleanup_r
+08003858 00000004 t __fp_unlock
+0800385c 0000002e T __sfmoreglue
+0800388c 000000a8 T __sfp
+08003934 000000f8 t __sinit.part.0
+08003a2c 00000014 T _cleanup
+08003a40 00000008 T __sinit
+08003a48 00000002 T __sfp_lock_acquire
+08003a4c 00000002 T __sfp_lock_release
+08003a50 00000002 T __sinit_lock_acquire
+08003a54 00000002 T __sinit_lock_release
+08003a58 00000014 T __fp_lock_all
+08003a6c 00000014 T __fp_unlock_all
+08003a80 00000040 T _fwalk
+08003ac0 00000048 T _fwalk_reent
+08003b08 000000a4 t rshift
+08003bac 000005d8 T __gethex
+08004184 00000036 T __match
+080041bc 000001ac T __hexnan
+08004368 00000004 T __localeconv_l
+0800436c 00000008 T _localeconv_r
+08004374 00000008 T localeconv
+0800437c 00000010 T malloc
+0800438c 00000010 T free
+0800439c 00000014 T _mbtowc_r
+080043b0 0000002a T __ascii_mbtowc
+080043e0 T memchr
+08004480 00000080 T _Balloc
+08004500 00000048 T _Bfree
+08004548 000000a4 T __multadd
+080045ec 000000b4 T __s2b
+080046a0 00000040 T __hi0bits
+080046e0 0000005e T __lo0bits
+08004740 0000002c T __i2b
+0800476c 0000015c T __multiply
+080048c8 000000e0 T __pow5mult
+080049a8 000000e8 T __lshift
+08004a90 00000042 T __mcmp
+08004ad4 0000014c T __mdiff
+08004c20 00000060 T __ulp
+08004c80 000000c0 T __b2d
+08004d40 000000d0 T __d2b
+08004e10 0000005c T __ratio
+08004e6c 00000040 T _mprec_log10
+08004eac 0000005a T __copybits
+08004f08 00000064 T __any_on
+08004f6c 0000001c T _calloc_r
+08004f88 000000c4 T _free_r
+0800504c 000000b4 T _malloc_r
+08005100 000000c4 T __ssputs_r
+080051c4 000000f8 T __ssprint_r
+080052bc 00000234 T _svfiprintf_r
+080052bc 00000234 T _svfprintf_r
+080054f0 0000003a t __sfputc_r
+0800552c 0000002e T __sfputs_r
+0800555c 0000001a T __sprint_r
+08005578 00000284 T _vfiprintf_r
+08005578 00000284 T _vfprintf_r
+080057fc 0000001c T vfiprintf
+080057fc 0000001c T vfprintf
+08005818 00000010 T nan
+08005828 00000024 T _sbrk_r
+0800584c 0000002c T _init_signal_r
+08005878 00000048 T _signal_r
+080058c0 00000054 T _raise_r
+08005914 00000060 T __sigtramp_r
+08005974 00000058 T raise
+080059cc 00000050 T signal
+08005a1c 00000034 T _init_signal
+08005a50 00000064 T __sigtramp
+08005ab4 0000002c T _kill_r
+08005ae0 00000004 T _getpid_r
+08005ae4 00000022 T __sread
+08005b08 00000004 T __seofread
+08005b0c 0000003e T __swrite
+08005b4c 00000020 T __sseek
+08005b6c 00000008 T __sclose
+08005b74 000000b0 T __swbuf_r
+08005c24 00000018 T __swbuf
+08005c3c 00000014 T _wctomb_r
+08005c50 0000001a T __ascii_wctomb
+08005c6c 00000104 T __swsetup_r
+08005d70 00000040 T __assert_func
+08005db0 0000000a T __assert
+08005dbc 00000024 T _close_r
+08005de0 00000114 T __sflush_r
+08005ef4 00000054 T _fflush_r
+08005f48 00000080 T fflush
+08005fc8 0000001c T _fiprintf_r
+08005fc8 0000001c T _fprintf_r
+08005fe4 00000028 T fiprintf
+08005fe4 00000028 T fprintf
+0800600c 000002f0 T __sfvwrite_r
+080062fc 0000002c T _lseek_r
+08006328 000000c0 T __smakebuf_r
+080063e8 0000005c T __swhatbuf_r
+08006444 000000f8 T memmove
+0800653c 00000002 T __malloc_lock
+08006540 00000002 T __malloc_unlock
+08006544 00000050 T _realloc_r
+08006594 0000002c T _read_r
+080065c0 0000000e T abort
+080065d0 0000002c T _fstat_r
+080065fc 00000024 T _isatty_r
+08006620 00000012 T _malloc_usable_size_r
+08006634 00000010 T _close
+08006644 00000010 T _fstat
+08006654 00000010 T _getpid
+08006664 00000010 T _isatty
+08006674 00000010 T _kill
+08006684 00000010 T _lseek
+08006694 00000010 T _read
+080066a4 0000001c T _sbrk
+080066c0 00000010 T _write
+080066d0 00000002 T _exit
+080066d4 T __aeabi_drsub
+080066dc 0000027a T __aeabi_dsub
+080066dc 0000027a T __subdf3
+080066e0 00000276 T __adddf3
+080066e0 00000276 T __aeabi_dadd
+08006958 0000001e T __aeabi_ui2d
+08006958 0000001e T __floatunsidf
+08006978 00000022 T __aeabi_i2d
+08006978 00000022 T __floatsidf
+0800699c 00000042 T __aeabi_f2d
+0800699c 00000042 T __extendsfdf2
+080069e0 0000006a T __aeabi_ul2d
+080069e0 0000006a T __floatundidf
+080069f0 0000005a T __aeabi_l2d
+080069f0 0000005a T __floatdidf
+08006a4c 00000254 T __aeabi_dmul
+08006a4c 00000254 T __muldf3
+08006ca0 000001d0 T __aeabi_ddiv
+08006ca0 000001d0 T __divdf3
+08006e70 0000008a T __gedf2
+08006e70 0000008a T __gtdf2
+08006e78 00000082 T __ledf2
+08006e78 00000082 T __ltdf2
+08006e80 0000007a T __cmpdf2
+08006e80 0000007a T __eqdf2
+08006e80 0000007a T __nedf2
+08006efc 00000020 T __aeabi_cdrcmple
+08006f0c 00000010 T __aeabi_cdcmpeq
+08006f0c 00000010 T __aeabi_cdcmple
+08006f1c 00000012 T __aeabi_dcmpeq
+08006f30 00000012 T __aeabi_dcmplt
+08006f44 00000012 T __aeabi_dcmple
+08006f58 00000012 T __aeabi_dcmpge
+08006f6c 00000012 T __aeabi_dcmpgt
+08006f80 0000002c T __aeabi_dcmpun
+08006f80 0000002c T __unorddf2
+08006fac 0000004e T __aeabi_d2iz
+08006fac 0000004e T __fixdfsi
+08006ffc 00000040 T __aeabi_d2uiz
+08006ffc 00000040 T __fixunsdfsi
+0800703c 0000009e T __aeabi_d2f
+0800703c 0000009e T __truncdfsf2
+080070dc 0000002e T __aeabi_d2lz
+080070dc 0000002e T __fixdfdi
+0800710c 0000003c T __aeabi_d2ulz
+0800710c 0000003c T __fixunsdfdi
+08007148 00000014 T dsrtos_kernel_get_kcb
+0800715c 00000012 t __DSB
+0800716e 00000010 t __NOP
+0800717e 0000001a t __get_MSP
+08007198 0000001a t __get_PSP
+080071b2 00000010 t __disable_irq
+080071c4 00000020 t NVIC_SystemReset
+080071e4 00000010 t __WFI
+080071f4 0000009c T dsrtos_panic
+08007290 00000048 T dsrtos_panic_save
+080072d8 00000014 T HardFault_Handler
+080072ec 00000064 T hard_fault_handler_c
+08007350 00000018 T MemManage_Handler
+08007368 00000018 T BusFault_Handler
+08007380 00000018 T UsageFault_Handler
+08007398 00000050 t panic_capture_context
+080073e8 00000044 t panic_capture_cpu_state
+0800742c 00000048 t panic_capture_fault_status
+08007474 00000052 t panic_capture_system_state
+080074c8 00000030 t panic_default_handler
+080074f8 00000088 t panic_print_context
+08007580 00000012 t panic_system_reset
+08007594 00000234 t panic_get_reason_string
+080077c8 00000008 T main
+080077d0 000000dc T SystemInit
+080078ac 000000e8 T SystemCoreClockUpdate
+08007994 00000036 t configure_system_clock
+080079cc 00000060 t configure_flash_wait_states
+08007a2c 00000064 t enable_hse_oscillator
+08007a90 0000006c t configure_pll
+08007afc 00000074 t switch_to_pll_clock
+08007b70 00000050 t configure_bus_prescalers
+08007bc0 0000002c t enable_fpu
+08007bec 00000040 t validate_clock_frequency
+08007c2c 0000000c W NMI_Handler
+08007c38 0000000c W SVC_Handler
+08007c44 0000000c W DebugMon_Handler
+08007c50 0000000c W PendSV_Handler
+08007c5c 0000000c W SysTick_Handler
+08007c68 00000060 T Reset_Handler
+08007cc8 0000000a T Default_Handler
+08007cd4 00000014 T __stack_chk_init
+08007ce8 t __EH_FRAME_BEGIN__
+08007ce8 T _init
+08007cf4 T _fini
+08007d00 T _etext
+08007f4c 00000004 R _global_impure_ptr
+08007f50 00000014 r fpi.1
+08007f64 00000014 r fpinan.0
+08007f78 00000028 r tinytens
+08007fa0 00000101 R _ctype_
+080080a4 00000020 R __sf_fake_stderr
+080080c4 00000020 R __sf_fake_stdout
+080080e4 00000020 R __sf_fake_stdin
+08008104 00000100 R __hexdig
+08008204 0000000c R _C_numeric_locale
+08008210 0000000c r p05.0
+08008220 000000c8 R __mprec_tens
+080082e8 00000028 R __mprec_tinytens
+08008310 00000028 R __mprec_bigtens
+080084d0 D __exidx_end
+080084d0 D __exidx_start
+080084d0 d __frame_dummy_init_array_entry
+080084d0 d __init_array_start
+080084d0 d __preinit_array_end
+080084d0 d __preinit_array_start
+080084d8 d __do_global_dtors_aux_fini_array_entry
+080084d8 d __fini_array_start
+080084d8 d __init_array_end
+080084dc d __fini_array_end
+080084dc A _sidata
+20000000 00000004 D _impure_ptr
+20000000 D _sdata
+20000004 00000060 d impure_data
+20000064 00000002 d numempty
+20000068 0000016c D __global_locale
+200001e0 00000060 d g_kernel_cb
+20000240 00000014 d g_panic_config
+20000254 00000004 D SystemCoreClock
+20000258 B __bss_start__
+20000258 00000001 b completed.1
+20000258 D _edata
+20000258 B _sbss
+20000258 D __TMC_END__
+2000025c 00000018 b object.0
+20000274 00000004 B __stack_chk_guard
+20000278 00000004 B __malloc_free_list
+2000027c 00000004 B __malloc_sbrk_start
+20000280 00000004 B errno
+20000284 00000004 b heap_end.0
+20000288 00000200 b panic_buffer.0
+20000488 00000001 b system_initialized
+2000048c 00000004 b active_clock_source
+20000490 B __bss_end__
+20000490 B _ebss
+20000490 00000090 b g_panic_context
+20000520 000001b0 b g_panic_history
+200006d0 00000010 b g_panic_state
+200006e0 B end
+20020000 R _estack

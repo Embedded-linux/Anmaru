@@ -128,7 +128,7 @@ struct dsrtos_priority_stats {
 /* Priority scheduler main structure */
 struct dsrtos_priority_scheduler {
     /* Base scheduler interface */
-    dsrtos_scheduler_plugin_t base;         /* Must be first member */
+    dsrtos_scheduler_base_t base;           /* Must be first member */
     
     /* Priority configuration */
     uint8_t num_priorities;                 /* Number of priority levels */

@@ -1,0 +1,4 @@
+p6/dsrtos_scheduler_rr_simple.c:26:17:dsrtos_rr_scheduler_init	16	static
+p6/dsrtos_scheduler_rr_simple.c:52:17:dsrtos_rr_scheduler_start	16	static
+p6/dsrtos_scheduler_rr_simple.c:67:17:dsrtos_rr_scheduler_stop	16	static
+p6/dsrtos_scheduler_rr_simple.c:82:24:dsrtos_rr_scheduler_get_instance	4	static

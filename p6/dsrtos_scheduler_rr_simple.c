@@ -37,7 +37,7 @@ dsrtos_status_t dsrtos_rr_scheduler_init(dsrtos_rr_scheduler_t* scheduler)
     scheduler->base.stats.operations = 0U;
     
     /* Initialize round-robin configuration */
-    scheduler->time_slice_us = 1000U; /* 1ms default time slice */
+    scheduler->time_slice_ms = 1U; /* 1ms default time slice */
     scheduler->current_task = NULL;
     
     /* Initialize ready queue */

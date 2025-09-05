@@ -110,7 +110,8 @@ INCLUDE_DIRS = \
     p5/include \
     p6 \
     p7 \
-    p8
+    p8 \
+    tests/include
 
 # Build output directories
 OBJ_DIR = $(OUTPUT_DIR)/obj
@@ -189,9 +190,21 @@ SYSTEM_C_SOURCES = \
     src/phase2/system_stm32f4xx.c \
     src/phase2/startup_stm32f407xx.c
 
+# Test framework sources (conditionally included)
+ifeq ($(ENABLE_TESTS),1)
+TEST_C_SOURCES = \
+    tests/src/dsrtos_test_framework.c \
+    tests/src/dsrtos_test_phase1.c \
+    tests/src/dsrtos_test_phase2.c \
+    tests/src/dsrtos_test_phase3.c \
+    tests/src/dsrtos_test_main.c
+else
+TEST_C_SOURCES =
+endif
+
 # Assembly sources (excluding conflicting files)
 ASM_SOURCES = \
-    $(PHASE8_DIR)/dsrtos_pendsv_handler.s
+    # $(PHASE8_DIR)/dsrtos_pendsv_handler.s  # Temporarily disabled due to linker errors
 
 # All C sources
 ALL_C_SOURCES = \
@@ -204,7 +217,8 @@ ALL_C_SOURCES = \
     $(PHASE7_C_SOURCES) \
     $(PHASE8_C_SOURCES) \
     $(COMMON_C_SOURCES) \
-    $(SYSTEM_C_SOURCES)
+    $(SYSTEM_C_SOURCES) \
+    $(TEST_C_SOURCES)
 
 # All sources
 ALL_SOURCES = $(ALL_C_SOURCES) $(ASM_SOURCES)
@@ -224,6 +238,7 @@ PHASE7_OBJS = $(PHASE7_C_SOURCES:%.c=$(OBJ_DIR)/%.o)
 PHASE8_OBJS = $(PHASE8_C_SOURCES:%.c=$(OBJ_DIR)/%.o)
 COMMON_OBJS = $(COMMON_C_SOURCES:%.c=$(OBJ_DIR)/%.o)
 SYSTEM_OBJS = $(SYSTEM_C_SOURCES:%.c=$(OBJ_DIR)/%.o)
+TEST_OBJS = $(TEST_C_SOURCES:%.c=$(OBJ_DIR)/%.o)
 ASM_OBJS = $(ASM_SOURCES:%.s=$(OBJ_DIR)/%.o)
 
 # All objects
@@ -238,6 +253,7 @@ ALL_OBJS = \
     $(PHASE8_OBJS) \
     $(COMMON_OBJS) \
     $(SYSTEM_OBJS) \
+    $(TEST_OBJS) \
     $(ASM_OBJS)
 
 # Dependency files
@@ -542,6 +558,9 @@ post-build: $(TARGET_ELF) $(TARGET_SYM) $(TARGET_LST)
 	$(MSG) "  Phase 8:  $(words $(PHASE8_C_SOURCES)) files"
 	$(MSG) "  Common:   $(words $(COMMON_C_SOURCES)) files"
 	$(MSG) "  System:   $(words $(SYSTEM_C_SOURCES)) files"
+ifeq ($(ENABLE_TESTS),1)
+	$(MSG) "  Tests:    $(words $(TEST_C_SOURCES)) files"
+endif
 	$(MSG) "  Assembly: $(words $(ASM_SOURCES)) files"
 	$(MSG) "  Total:    $(words $(ALL_SOURCES)) files"
 	$(MSG) ""
@@ -680,19 +699,67 @@ help:
 	@$(ECHO) "  symbols      - Generate symbol table"
 	@$(ECHO) "  disasm       - Generate disassembly"
 	@$(ECHO) ""
+	@$(ECHO) "Test Targets:"
+	@$(ECHO) "  test         - Run all tests"
+	@$(ECHO) "  test-phase1  - Run Phase 1 tests"
+	@$(ECHO) "  test-phase2  - Run Phase 2 tests"
+	@$(ECHO) "  test-phase3  - Run Phase 3 tests"
+	@$(ECHO) "  test-coverage- Run tests with coverage"
+	@$(ECHO) ""
 	@$(ECHO) "Options:"
 	@$(ECHO) "  BUILD_TYPE=  - Build configuration (DEBUG/RELEASE/CERTIFIED)"
 	@$(ECHO) "  ENABLE_FPU=  - FPU support (0/1, default: 1)"
 	@$(ECHO) "  ENABLE_MPU=  - MPU support (0/1, default: 1)"
 	@$(ECHO) "  ENABLE_STATS=- Statistics (0/1, default: 1)"
 	@$(ECHO) "  ENABLE_TRACE=- Tracing (0/1, default: 0)"
+	@$(ECHO) "  ENABLE_TESTS=- Test framework (0/1, default: 0)"
 	@$(ECHO) "  V=           - Verbosity (0/1/2, default: 1)"
 	@$(ECHO) ""
 	@$(ECHO) "Examples:"
 	@$(ECHO) "  make BUILD_TYPE=RELEASE"
 	@$(ECHO) "  make debug flash"
 	@$(ECHO) "  make certified analyze"
+	@$(ECHO) "  make test"
+	@$(ECHO) "  make test-phase1"
 	@$(ECHO) "  make V=2 clean all"
+
+# ============================================================================
+# TEST TARGETS
+# ============================================================================
+
+# Test build target
+.PHONY: test
+test: ENABLE_TESTS=1
+test: clean debug
+	$(MSG) "Running DSRTOS Test Suite..."
+	$(Q)$(TARGET_ELF)
+
+# Test specific phase
+.PHONY: test-phase1 test-phase2 test-phase3
+test-phase1: ENABLE_TESTS=1
+test-phase1: clean debug
+	$(MSG) "Running Phase 1 Tests..."
+	$(Q)$(TARGET_ELF) --phase=1
+
+test-phase2: ENABLE_TESTS=1
+test-phase2: clean debug
+	$(MSG) "Running Phase 2 Tests..."
+	$(Q)$(TARGET_ELF) --phase=2
+
+test-phase3: ENABLE_TESTS=1
+test-phase3: clean debug
+	$(MSG) "Running Phase 3 Tests..."
+	$(Q)$(TARGET_ELF) --phase=3
+
+# Test with coverage
+.PHONY: test-coverage
+test-coverage: ENABLE_TESTS=1 ENABLE_COVERAGE=1
+test-coverage: clean debug
+	$(MSG) "Running Tests with Coverage..."
+	$(Q)$(TARGET_ELF)
+	$(MSG) "Generating coverage report..."
+	$(Q)lcov --capture --directory . --output-file coverage.info
+	$(Q)genhtml coverage.info --output-directory coverage_report
 
 # ============================================================================
 # DEPENDENCIES

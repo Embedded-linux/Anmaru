@@ -1,0 +1,5 @@
+p7/dsrtos_migration_simple.c:29:17:dsrtos_migration_controller_init	16	static
+p7/dsrtos_migration_simple.c:44:17:dsrtos_migration_enable	16	static
+p7/dsrtos_migration_simple.c:55:17:dsrtos_migration_disable	16	static
+p7/dsrtos_migration_simple.c:66:17:dsrtos_migrate_task	24	static
+p7/dsrtos_migration_simple.c:89:32:dsrtos_migration_controller_get_instance	4	static
