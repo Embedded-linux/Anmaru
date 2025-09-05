@@ -1,8 +1,0 @@
-src/common/dsrtos_error.c:243:13:dsrtos_error_to_string	24	static
-src/common/dsrtos_error.c:271:13:dsrtos_error_category_string	32	static
-src/common/dsrtos_error.c:304:25:dsrtos_error_get_severity	24	static
-src/common/dsrtos_error.c:330:6:dsrtos_error_is_critical	24	static
-src/common/dsrtos_error.c:348:6:dsrtos_error_requires_shutdown	32	static
-src/common/dsrtos_error.c:384:34:find_error_entry	32	static
-src/common/dsrtos_error.c:422:44:find_category_entry	24	static
-src/common/dsrtos_error.c:445:13:is_valid_error_code	24	static

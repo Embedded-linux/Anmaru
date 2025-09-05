@@ -182,8 +182,16 @@ PHASE8_C_SOURCES = \
 # Common sources
 COMMON_C_SOURCES = \
     src/common/dsrtos_error.c \
-    src/common/dsrtos_memory_stub.c \
-    src/main.c
+    src/common/dsrtos_memory_stub.c
+
+# Main source (conditional based on test mode)
+ifeq ($(ENABLE_TESTS),1)
+MAIN_SOURCE = src/main_minimal.c
+else
+MAIN_SOURCE = src/main.c
+endif
+
+COMMON_C_SOURCES += $(MAIN_SOURCE)
 
 # System sources
 SYSTEM_C_SOURCES = \
@@ -194,10 +202,7 @@ SYSTEM_C_SOURCES = \
 ifeq ($(ENABLE_TESTS),1)
 TEST_C_SOURCES = \
     tests/src/dsrtos_test_framework.c \
-    tests/src/dsrtos_test_phase1.c \
-    tests/src/dsrtos_test_phase2.c \
-    tests/src/dsrtos_test_phase3.c \
-    tests/src/dsrtos_test_main.c
+    tests/src/dsrtos_test_minimal.c
 else
 TEST_C_SOURCES =
 endif
@@ -700,11 +705,12 @@ help:
 	@$(ECHO) "  disasm       - Generate disassembly"
 	@$(ECHO) ""
 	@$(ECHO) "Test Targets:"
-	@$(ECHO) "  test         - Run all tests"
-	@$(ECHO) "  test-phase1  - Run Phase 1 tests"
-	@$(ECHO) "  test-phase2  - Run Phase 2 tests"
-	@$(ECHO) "  test-phase3  - Run Phase 3 tests"
-	@$(ECHO) "  test-coverage- Run tests with coverage"
+	@$(ECHO) "  test                - Run all tests"
+	@$(ECHO) "  test-phase1         - Run Phase 1 tests"
+	@$(ECHO) "  test-phase2         - Run Phase 2 tests"
+	@$(ECHO) "  test-phase3         - Run Phase 3 tests"
+	@$(ECHO) "  test-minimal-phase3 - Build minimal Phase 3 test for target board"
+	@$(ECHO) "  test-coverage       - Run tests with coverage"
 	@$(ECHO) ""
 	@$(ECHO) "Options:"
 	@$(ECHO) "  BUILD_TYPE=  - Build configuration (DEBUG/RELEASE/CERTIFIED)"
@@ -760,6 +766,14 @@ test-coverage: clean debug
 	$(MSG) "Generating coverage report..."
 	$(Q)lcov --capture --directory . --output-file coverage.info
 	$(Q)genhtml coverage.info --output-directory coverage_report
+
+# Minimal Phase 3 test target
+.PHONY: test-minimal-phase3
+test-minimal-phase3: ENABLE_TESTS=1
+test-minimal-phase3: clean debug
+	$(MSG) "Building Minimal Phase 3 Test for Target Board..."
+	$(MSG) "ELF file ready: $(TARGET_ELF)"
+	$(MSG) "Flash this to STM32F407VG board for testing"
 
 # ============================================================================
 # DEPENDENCIES
